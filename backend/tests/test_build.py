@@ -4,7 +4,7 @@ from pathlib import Path
 def test_package_build():
     # Run your build command, e.g., standard Python build
     result = subprocess.run(
-        ["python", "-m", "build"],
+        ["uv", "build"],
         capture_output=True,
         text=True,
     )
