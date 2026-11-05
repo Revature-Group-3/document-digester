@@ -7,7 +7,10 @@ authors = [
     { name = "Taylor-Klinsky", email = "taylor@klinsky.org" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "fastapi>=0.162.0",
+    "uvicorn>=0.54.0",
+]
 
 [project.scripts]
 document-digester = "document_digester:main"
@@ -18,5 +21,6 @@ build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
+    "httpx>=0.28.1",
     "pytest>=9.2.0",
 ]
