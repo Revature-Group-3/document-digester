@@ -1,6 +1,8 @@
-<mat-card class="chat-bubble" appearance="outlined">
+<mat-card class="{{ data()?.role }}-bubble">
     <mat-card-content>
+        @if (data()?.role === 'user') {
+        <span>{{ data()?.createdAt | date:'shortTime' }}</span>
+        }
         <p>{{ data()?.content }}</p>
-        <span>{{ data()?.createdAt }}</span>
     </mat-card-content>
 </mat-card>

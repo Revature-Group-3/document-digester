@@ -1,3 +1,12 @@
 mat-card {
-    margin: 10px
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.user-bubble {
+    background-color: var(--mat-sys-primary-container);
+}
+
+.assistant-bubble {
+    background-color: var(--mat-sys-background);
 }

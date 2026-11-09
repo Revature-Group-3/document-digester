@@ -1,0 +1,36 @@
+:host {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+.message-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+}
+
+.message-row {
+    display: flex;
+    box-sizing: border-box;
+    width: 95%;
+    min-width: 0;
+    padding: 0 5px 0 5px;
+    margin: 5px;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.message-row:not(.user-message) {
+    justify-content: flex-start;
+}
+
+app-chat-bubble {
+    display: block;
+    width: 90%;
+    min-width: 0;
+}
