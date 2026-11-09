@@ -16,6 +16,9 @@ import { SearchBar } from '../search-bar/search-bar';
 export class ChatWindow {
   conversation = input<Conversation | null>(null);
   messages = signal<ChatMessage[]>([]);
+  messageSearch = signal('');
+
+
 
   constructor() {
     effect(() => {

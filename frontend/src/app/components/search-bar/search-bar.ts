@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -9,4 +9,7 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './search-bar.scss',
   templateUrl: './search-bar.html',
 })
-export class SearchBar { }
+export class SearchBar {
+  value = input('');
+  searchChange = output<string>();
+}

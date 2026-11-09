@@ -1,7 +1,8 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Search</mat-label>
-        <input matInput placeholder="">
+        <input matInput type="text" [value]="value()" (input)="searchChange.emit($any($event.target).value)"
+            placeholder="Search...">
         <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 </p>
