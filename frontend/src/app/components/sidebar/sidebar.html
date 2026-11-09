@@ -1,0 +1,20 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" opened class="example-sidenav" [fixedInViewport]="true">
+        <h2 class="sidebar-heading">Document Digester</h2>
+        <mat-nav-list>
+            <mat-list-item>
+                <span mat-line>Item 1</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span mat-line>Item 2</span>
+            </mat-list-item>
+            <mat-list-item>
+                <span mat-line>Item 3</span>
+            </mat-list-item>
+        </mat-nav-list>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-chat-window />
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,12 @@
+.example-sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    background: var(--mat-sys-secondary-container);
+}
+
+.sidebar-heading {
+    align-self: flex-start;
+    padding-inline-start: 10px;
+}
