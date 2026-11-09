@@ -1,0 +1,198 @@
+{
+  "conversations": [
+    {
+      "conversationId": "conv_001",
+      "title": "Planning a Neighborhood Meetup",
+      "createdAt": "2026-11-09T14:00:00Z",
+      "updatedAt": "2026-11-09T14:09:00Z",
+      "messages": [
+        {
+          "id": "msg_001",
+          "role": "user",
+          "content": "I'm planning a small community event. Can you help me put together a checklist?",
+          "createdAt": "2026-11-09T14:00:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_002",
+          "role": "assistant",
+          "content": "Absolutely. Start with the venue, date and time, budget, permits, volunteers, promotion, supplies, and an event-day schedule. What kind of event are you organizing?",
+          "createdAt": "2026-11-09T14:01:00Z",
+          "status": "complete"
+        },
+        {
+          "id": "msg_003",
+          "role": "user",
+          "content": "A neighborhood meetup in a local park, probably around 30 people.",
+          "createdAt": "2026-11-09T14:03:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_004",
+          "role": "assistant",
+          "content": "For 30 people in a park, start by checking reservation rules, choosing a date and rain plan, estimating refreshment costs, recruiting volunteers, and sharing RSVP details with neighbors.",
+          "createdAt": "2026-11-09T14:04:00Z",
+          "status": "complete"
+        },
+        {
+          "id": "msg_005",
+          "role": "user",
+          "content": "Could you suggest a few low-cost activities that don't need special equipment?",
+          "createdAt": "2026-11-09T14:08:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_006",
+          "role": "assistant",
+          "content": "Try conversation prompt cards, neighborhood trivia, a group walk, a community idea board, or a casual show-and-tell about favorite local spots. These are easy to join without special equipment.",
+          "createdAt": "2026-11-09T14:09:00Z",
+          "status": "complete"
+        }
+      ]
+    },
+    {
+      "conversationId": "conv_002",
+      "title": "Understanding REST APIs",
+      "createdAt": "2026-11-09T11:00:00Z",
+      "updatedAt": "2026-11-09T11:15:00Z",
+      "messages": [
+        {
+          "id": "msg_007",
+          "role": "user",
+          "content": "Can you explain what a REST API is in plain English?",
+          "createdAt": "2026-11-09T11:00:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_008",
+          "role": "assistant",
+          "content": "A REST API is a set of conventions that lets software communicate over HTTP. One application makes a request to a resource, and another application sends back a response, often as JSON.",
+          "createdAt": "2026-11-09T11:01:00Z",
+          "status": "complete"
+        },
+        {
+          "id": "msg_009",
+          "role": "user",
+          "content": "So would Angular use an API to talk to my Java Spring Boot backend?",
+          "createdAt": "2026-11-09T11:10:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_010",
+          "role": "assistant",
+          "content": "Exactly. Angular can send an HTTP request to a Spring Boot endpoint. Spring Boot handles the request, runs the relevant logic, and returns data—often as JSON—which Angular can then display.",
+          "createdAt": "2026-11-09T11:11:00Z",
+          "status": "complete"
+        }
+      ]
+    },
+    {
+      "conversationId": "conv_003",
+      "title": "Weekend Reading Recommendations",
+      "createdAt": "2026-11-09T07:00:00Z",
+      "updatedAt": "2026-11-09T07:15:00Z",
+      "messages": [
+        {
+          "id": "msg_011",
+          "role": "user",
+          "content": "I'd like to get back into reading. Any recommendations for accessible books about political history?",
+          "createdAt": "2026-11-09T07:00:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_012",
+          "role": "assistant",
+          "content": "Narrative histories focused on a particular election, movement, or political figure can be more approachable than broad academic surveys. Starting with a topic you already find interesting is a good way to branch out.",
+          "createdAt": "2026-11-09T07:01:00Z",
+          "status": "complete"
+        },
+        {
+          "id": "msg_013",
+          "role": "user",
+          "content": "I'd prefer something focused on American political institutions.",
+          "createdAt": "2026-11-09T07:10:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_014",
+          "role": "assistant",
+          "content": "Look for accessible introductions to Congress, the presidency, federalism, and the Supreme Court. A book focused on how a bill becomes law—or how congressional committees operate—could be a practical starting point.",
+          "createdAt": "2026-11-09T07:11:00Z",
+          "status": "complete"
+        }
+      ]
+    },
+    {
+      "conversationId": "conv_004",
+      "title": "SQL Query Practice",
+      "createdAt": "2026-11-09T02:00:00Z",
+      "updatedAt": "2026-11-09T02:20:00Z",
+      "messages": [
+        {
+          "id": "msg_015",
+          "role": "user",
+          "content": "What's the difference between WHERE and HAVING in SQL?",
+          "createdAt": "2026-11-09T02:00:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_016",
+          "role": "assistant",
+          "content": "WHERE filters individual rows before grouping. HAVING filters groups after GROUP BY has been applied. Use WHERE for conditions on source rows and HAVING for conditions involving aggregates such as COUNT or AVG.",
+          "createdAt": "2026-11-09T02:01:00Z",
+          "status": "complete"
+        },
+        {
+          "id": "msg_017",
+          "role": "user",
+          "content": "Can HAVING be used without GROUP BY?",
+          "createdAt": "2026-11-09T02:10:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_018",
+          "role": "assistant",
+          "content": "Yes. Many SQL databases allow HAVING without an explicit GROUP BY, treating the result as one group. It's less common, though, and behavior can vary by database dialect.",
+          "createdAt": "2026-11-09T02:11:00Z",
+          "status": "complete"
+        }
+      ]
+    },
+    {
+      "conversationId": "conv_005",
+      "title": "Ideas for a Portfolio Project",
+      "createdAt": "2026-11-08T14:00:00Z",
+      "updatedAt": "2026-11-08T14:15:00Z",
+      "messages": [
+        {
+          "id": "msg_019",
+          "role": "user",
+          "content": "I want to build a portfolio project that demonstrates full-stack skills. Any ideas?",
+          "createdAt": "2026-11-08T14:00:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_020",
+          "role": "assistant",
+          "content": "A task-management app, personal finance dashboard, event-planning tool, or searchable book catalog could demonstrate frontend, backend, database, and authentication skills. Choose one with a clear core workflow rather than too many features at once.",
+          "createdAt": "2026-11-08T14:01:00Z",
+          "status": "complete"
+        },
+        {
+          "id": "msg_021",
+          "role": "user",
+          "content": "I like the event-planning idea. What features would make it interesting without making it enormous?",
+          "createdAt": "2026-11-08T14:10:00Z",
+          "status": "sent"
+        },
+        {
+          "id": "msg_022",
+          "role": "assistant",
+          "content": "A focused version could let users create events, invite attendees, collect RSVPs, and view an attendee list. Authentication and a simple calendar view could be stretch goals. That gives you several meaningful CRUD operations and a clear data model.",
+          "createdAt": "2026-11-08T14:11:00Z",
+          "status": "complete"
+        }
+      ]
+    }
+  ]
+}
