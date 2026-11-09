@@ -1,24 +1,24 @@
-from langchain_text_splitters import HTMLHeaderTextSplitter
+from langchain_text_splitters import MarkdownHeaderTextSplitter
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 def chunk_page(html : str, metadata: dict) :
     header_to_split_on=[
-            ("h1", "Header 1"),
-            ("h2", "Header 2"),
-            ("h3", "Header 3")
+            ("##", "Header 2"),
+            ("###", "Header 3")
         ]
 
-    html_header_splitter = HTMLHeaderTextSplitter(
+    # strip_header=False so header stays inside chunk
+    html_header_splitter = MarkdownHeaderTextSplitter(
             headers_to_split_on=header_to_split_on,
+            strip_headers=False
             )
     sections = html_header_splitter.split_text(html)
 
-
-    # split document by relevant tags
     splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
             chunk_overlap=200,
             add_start_index=True,
+
             )
     
     chunks = splitter.split_documents(sections)

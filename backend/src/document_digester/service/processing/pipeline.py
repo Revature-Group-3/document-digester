@@ -16,3 +16,7 @@ def run_pipeline():
 
 if __name__=="__main__":
     print(len(run_pipeline()))
+
+    chunks = run_pipeline()
+    print(len(chunks))
+    print(chunks[5])

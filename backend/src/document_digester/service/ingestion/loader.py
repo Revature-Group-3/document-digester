@@ -1,18 +1,17 @@
-import json
 from pathlib import Path
 
 from document_digester.settings import DOCS_DIR
 
 def read_page(path: Path) -> dict:
     with open(path, encoding="utf-8") as f:
-        data = json.load(f)
+        data = f.read()
+        lines = data.splitlines()
 
     return {
-        "title": data.get("title", ""),
-        "body": data.get("body", ""),
-        "source": data.get("current_page_name", path.stem),
+        "title": lines[0],
+        "source": lines[1],
+        "body": "\n".join(lines[3:])
     }
 
-
 def load_pages() -> list[dict]:
-    return [read_page(path) for path in Path(DOCS_DIR).rglob("*.fjson")]
+    return [read_page(path) for path in Path(DOCS_DIR).rglob("*.txt")]
