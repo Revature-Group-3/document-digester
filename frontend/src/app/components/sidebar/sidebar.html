@@ -2,20 +2,13 @@
     <mat-sidenav #sidenav mode="side" opened class="sidenav" [fixedInViewport]="true">
         <h2 class="sidebar-heading">Document Digester</h2>
         <app-search-bar />
-        <mat-nav-list>
-            <mat-list-item>
-                <span mat-line>Item 1</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span mat-line>Item 2</span>
-            </mat-list-item>
-            <mat-list-item>
-                <span mat-line>Item 3</span>
-            </mat-list-item>
-        </mat-nav-list>
+        <app-conversation-list
+            [conversations]="conversations()"
+            (conversationSelected)="selectConversation($event)"
+        />
 
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-chat-window />
+        <app-chat-window [conversation]="selectedConversation()" />
     </mat-sidenav-content>
 </mat-sidenav-container>

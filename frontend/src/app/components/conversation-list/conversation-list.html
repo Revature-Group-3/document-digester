@@ -1,0 +1,7 @@
+<mat-nav-list class="conversation-list">
+    @for (conversation of conversations(); track conversation.conversationId) {
+    <mat-list-item (click)="selectConversation(conversation.conversationId)">
+        {{ conversation.title }}
+    </mat-list-item>
+    }
+</mat-nav-list>
