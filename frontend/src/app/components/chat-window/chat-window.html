@@ -1,5 +1,7 @@
 <div class="chat-window">
     <app-search-bar />
-    <app-message-list [messages]="messages()" />
-    <app-chat-input />
+    <div class="chat-window-body">
+        <app-message-list [messages]="messages()" />
+        <app-chat-input />
+    </div>
 </div>

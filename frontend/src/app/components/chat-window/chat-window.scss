@@ -3,8 +3,10 @@ app-chat-input {
 }
 
 app-search-bar {
+    display: block;
     flex-shrink: 0;
-    padding: 10px;
+    box-sizing: border-box;
+    padding: 10px 10px 10px 20px;
 }
 
 app-message-list {
@@ -17,4 +19,15 @@ app-message-list {
     display: flex;
     flex-direction: column;
     height: 100vh;
+}
+
+.chat-window-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    box-sizing: border-box;
+    align-self: center;
+    width: 100%;
+    max-width: 1000px;
 }
