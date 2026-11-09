@@ -22,10 +22,17 @@ mat-sidenav-content {
 }
 
 mat-sidenav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     flex-shrink: 0;
 }
 
 .sidebar-heading {
     align-self: flex-start;
     padding-inline-start: 10px;
+}
+
+app-search-bar {
+    align-self: center;
 }
