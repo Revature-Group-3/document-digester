@@ -1,0 +1,18 @@
+{"id": "q001", "question": "How do I hook up a Timer's timeout from a script instead of the editor?", "page": "getting_started/step_by_step/signals", "section": "Connecting a signal via code", "type": "paraphrase"}
+{"id": "q002", "question": "How do I use the connect method to hook up a signal in code?", "page": "getting_started/step_by_step/signals", "section": "Connecting a signal via code", "type": "direct"}
+{"id": "q003", "question": "How do I connect a Button's pressed signal using the Signals dock?", "page": "getting_started/step_by_step/signals", "section": "Connecting a signal in the editor", "type": "direct"}
+{"id": "q004", "question": "How can my player script announce that its health hit zero so other nodes can react?", "page": "getting_started/step_by_step/signals", "section": "Custom signals", "type": "paraphrase"}
+{"id": "q005", "question": "Which scene does Godot launch when I press F5, and how do I change it?", "page": "getting_started/step_by_step/nodes_and_scenes", "section": "Setting the main scene", "type": "paraphrase"}
+{"id": "q006", "question": "If I place five copies of the same enemy scene, how do I change just one of them without affecting the rest?", "page": "getting_started/step_by_step/instancing", "section": "Editing scenes and instances", "type": "paraphrase"}
+{"id": "q007", "question": "How do I make my sprite move forward only while the player holds the up key?", "page": "getting_started/step_by_step/scripting_player_input", "section": "Moving when pressing \"up\"", "type": "paraphrase"}
+{"id": "q008", "question": "Why would I need a singleton to keep the player's score when switching between scenes?", "page": "tutorials/scripting/singletons_autoload", "section": "Introduction", "type": "conceptual"}
+{"id": "q009", "question": "Where in Project Settings do I register an autoload script?", "page": "tutorials/scripting/singletons_autoload", "section": "Autoload", "type": "direct"}
+{"id": "q010", "question": "How do I go from the main menu to the first level in code?", "page": "tutorials/scripting/scene_tree", "section": "Changing current scene", "type": "paraphrase"}
+{"id": "q011", "question": "In what order do nodes run _process, and why does a parent's _ready run after its children's?", "page": "tutorials/scripting/scene_tree", "section": "Tree order", "type": "conceptual"}
+{"id": "q012", "question": "What properties does move_and_slide use to calculate sliding?", "page": "tutorials/physics/using_character_body_2d", "section": "move_and_slide", "type": "direct"}
+{"id": "q013", "question": "Should my character use move_and_collide or move_and_slide?", "page": "tutorials/physics/using_character_body_2d", "section": "Which movement method to use?", "type": "conceptual"}
+{"id": "q014", "question": "How can the same code handle both the keyboard arrow keys and a gamepad stick?", "page": "tutorials/inputs/inputevent", "section": "Input actions", "type": "paraphrase"}
+{"id": "q015", "question": "How do I mark which objects in my level should be written to a save file?", "page": "tutorials/io/saving_games", "section": "Identify persistent objects", "type": "paraphrase"}
+{"id": "q016", "question": "Why can't I store a Vector2 or Color directly in JSON save data?", "page": "tutorials/io/saving_games", "section": "JSON limitations", "type": "direct"}
+{"id": "q017", "question": "How do I keep a UI element in the middle of its parent?", "page": "tutorials/ui/size_and_anchors", "section": "Centering a control", "type": "paraphrase"}
+{"id": "q018", "question": "What signal does a Timer emit when its countdown finishes?", "page": "classes/class_timer", "section": "Signals", "type": "direct"}
