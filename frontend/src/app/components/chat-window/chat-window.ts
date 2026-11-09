@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { ChatInput } from '../chat-input/chat-input';
+import { ChatBubble } from '../chat-bubble/chat-bubble';
 
 @Component({
-  imports: [RouterOutlet, ChatInput],
+  imports: [ChatInput, ChatBubble],
   selector: 'app-chat-window',
   styleUrl: './chat-window.scss',
   templateUrl: './chat-window.html',
