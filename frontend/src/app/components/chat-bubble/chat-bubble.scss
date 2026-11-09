@@ -1,12 +1,18 @@
+:host {
+    display: flex;
+}
+
 mat-card {
     box-sizing: border-box;
-    width: 100%;
 }
 
 .user-bubble {
     background-color: var(--mat-sys-primary-container);
+    width: fit-content;
+    margin-left: auto;
 }
 
 .assistant-bubble {
     background-color: var(--mat-sys-background);
+    width: 100%;
 }
