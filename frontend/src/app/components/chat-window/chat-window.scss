@@ -1,5 +1,21 @@
 app-chat-input {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    flex-shrink: 0;
+    border: 1px solid green;
+}
+
+app-search-bar {
+    flex-shrink: 0;
+    padding: 10px;
+}
+
+app-message-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }

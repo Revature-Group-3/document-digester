@@ -5,9 +5,11 @@ import { ChatService } from '../../services/chat-service';
 import { Conversation } from '../../models/conversation';
 import { ChatMessage } from '../../models/chat-message';
 import { MessageList } from '../message-list/message-list';
+import { SearchBar } from '../search-bar/search-bar';
+import { ChatBubble } from '../chat-bubble/chat-bubble';
 
 @Component({
-  imports: [ChatInput, MessageList],
+  imports: [ChatInput, MessageList, SearchBar, ChatBubble],
   selector: 'app-chat-window',
   styleUrl: './chat-window.scss',
   templateUrl: './chat-window.html',
