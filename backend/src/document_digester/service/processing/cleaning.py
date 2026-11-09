@@ -1,16 +1,8 @@
-from bs4 import BeautifulSoup
+import re
 
 # returns cleaned html
-def clean_html(html : str ) -> str:
-    pages = BeautifulSoup(html, "html.parser")
-    # 1. purge scripts and styles
-    for tag in pages(["script", "style"]):
-        tag.decompose()
-
-    for tag in pages.select("a.headerlink"):
-        tag.decompose()
-
-    for tag in pages.find_all("img"):
-        tag.decompose()
-
-    return str(pages)
+def clean_html(text: str) -> str:
+    text = re.sub(r"^(.+)\n=+$", r"## \1", text, flags=re.MULTILINE)
+    text = re.sub(r"^(.+)\n-+$", r"### \1", text, flags=re.MULTILINE)
+    text = re.sub(r"^\s*\[image\]\s*\n?", "", text, flags=re.MULTILINE)
+    return str(text)

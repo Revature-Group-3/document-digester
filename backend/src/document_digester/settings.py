@@ -1,2 +1,3 @@
 import os
-DOCS_DIR = os.getenv("DOCS_DIR", "path/to/godot-docs/_build/json")
+from pathlib import Path
+DOCS_DIR = os.getenv("DOCS_DIR", str(Path(__file__).resolve().parents[3] / "docs"))
