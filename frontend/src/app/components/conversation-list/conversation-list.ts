@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 })
 export class ConversationList {
   conversations = input<Conversation[]>();
+  selectedConversationId = input<string | null>(null);
   conversationSelected = output<string>();
 
   selectConversation(conversationId: string): void {

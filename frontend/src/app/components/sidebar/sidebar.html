@@ -4,6 +4,7 @@
         <app-search-bar />
         <app-conversation-list
             [conversations]="conversations()"
+            [selectedConversationId]="selectedConversation()?.conversationId ?? null"
             (conversationSelected)="selectConversation($event)"
         />
 
