@@ -1,11 +1,10 @@
 .flex-container {
     display: flex;
     gap: 15px;
-    width: 100%;
+    width: 1;
     justify-content: space-around;
     flex-wrap: nowrap;
-
-    outline: 1px solid red;
+    padding: 10px;
 }
 
 mat-form-field {
