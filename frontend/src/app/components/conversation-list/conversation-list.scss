@@ -6,3 +6,13 @@ mat-list-item.selected {
 .conversation-list {
     padding: 10px;
 }
+
+.more-button {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.conversation-item:hover .more-button,
+.conversation-item:focus-within .more-button {
+    opacity: 1;
+}

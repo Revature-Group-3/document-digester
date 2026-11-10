@@ -1,10 +1,30 @@
-<mat-nav-list class="conversation-list">
+<mat-nav-list>
     @for (conversation of conversations(); track conversation.conversationId) {
     <mat-list-item
+        class="conversation-item"
         [class.selected]="selectedConversationId() === conversation.conversationId"
         (click)="selectConversation(conversation.conversationId)"
     >
-        {{ conversation.title }}
+        <span matListItemTitle>
+            {{ conversation.title }}
+        </span>
+
+        <button mat-icon-button matListItemMeta class="more-button" [matMenuTriggerFor]="conversationMenu"
+            (click)="$event.stopPropagation()" aria-label="Conversation options">
+            <mat-icon>more_horiz</mat-icon>
+        </button>
+
+        <mat-menu #conversationMenu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Rename</span>
+            </button>
+
+            <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Delete</span>
+            </button>
+        </mat-menu>
     </mat-list-item>
     }
 </mat-nav-list>
