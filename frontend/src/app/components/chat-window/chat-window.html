@@ -1,7 +1,7 @@
 <div class="chat-window">
     <app-search-bar [value]="messageSearch()" (searchChange)="messageSearch.set($event)" />
     <div class="chat-window-body">
-        <app-message-list [messages]="messages()" />
+        <app-message-list [messages]="filteredMessages()" />
         <app-chat-input />
     </div>
 </div>

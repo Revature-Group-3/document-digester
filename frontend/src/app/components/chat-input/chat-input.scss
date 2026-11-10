@@ -10,3 +10,9 @@
 mat-form-field {
     flex: 1;
 }
+
+mat-hint {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

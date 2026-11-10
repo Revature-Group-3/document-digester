@@ -1,4 +1,4 @@
-import { Component, effect, input, signal } from '@angular/core';
+import { Component, computed, effect, input, signal } from '@angular/core';
 
 import { ChatInput } from '../chat-input/chat-input';
 import { Conversation } from '../../models/conversation';
@@ -18,13 +18,16 @@ export class ChatWindow {
   messages = signal<ChatMessage[]>([]);
   messageSearch = signal('');
 
-
-
   constructor() {
     effect(() => {
       this.messages.set(this.conversation()?.messages ?? []);
     });
   }
+
+  filteredMessages = computed(() => {
+    const search = this.messageSearch().toLowerCase();
+    return this.messages().filter(message => message.content.toLowerCase().includes(search));
+  });
 
   sendMessage(contentInput: string) {
     const message: ChatMessage = {
