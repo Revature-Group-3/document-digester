@@ -1,5 +1,6 @@
-import { Component, computed, effect, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 
+import { ChatService } from '../../services/chat-service';
 import { ChatInput } from '../chat-input/chat-input';
 import { Conversation } from '../../models/conversation';
 import { ChatMessage } from '../../models/chat-message';
@@ -14,6 +15,7 @@ import { SearchBar } from '../search-bar/search-bar';
 })
 
 export class ChatWindow {
+  private chatService = inject(ChatService);
   conversation = input<Conversation | null>(null);
   messages = signal<ChatMessage[]>([]);
   messageSearch = signal('');
@@ -30,6 +32,9 @@ export class ChatWindow {
   });
 
   sendMessage(contentInput: string) {
+    const conversationId = this.conversation()?.conversationId;
+    if (!conversationId) return;
+
     const message: ChatMessage = {
       id: crypto.randomUUID(),
       role: 'user',
@@ -37,6 +42,8 @@ export class ChatWindow {
       createdAt: Date.now().toString(),
       status: 'sent',
     };
+
+    this.chatService.addMessage(conversationId, message);
     this.messages.update(messages => [...messages, message]);
   }
 }
