@@ -1,5 +1,7 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+
 import { MatListModule } from '@angular/material/list';
 import { ChatWindow } from '../chat-window/chat-window';
 import { SearchBar } from '../search-bar/search-bar';
@@ -13,6 +15,7 @@ import { ChatService } from '../../services/chat-service';
   styleUrl: './sidebar.scss',
   imports: [
     MatSidenavModule,
+    MatButtonModule,
     MatListModule,
     ChatWindow,
     SearchBar,

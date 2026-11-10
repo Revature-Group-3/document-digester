@@ -3,6 +3,7 @@
         <div class="sidenav-layout">
             <h2 class="sidebar-heading">Document Digester</h2>
             <app-search-bar [value]="conversationSearch()" (searchChange)="conversationSearch.set($event)" />
+            <button mat-button="filled">+ New Conversation</button>
             <app-conversation-list [conversations]="filteredConversations()"
                 [selectedConversationId]="selectedConversation()?.conversationId ?? null"
                 (conversationSelected)="selectConversation($event)" />
