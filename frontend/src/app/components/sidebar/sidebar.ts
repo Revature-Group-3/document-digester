@@ -1,5 +1,7 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+
 import { MatListModule } from '@angular/material/list';
 import { ChatWindow } from '../chat-window/chat-window';
 import { SearchBar } from '../search-bar/search-bar';
@@ -13,6 +15,7 @@ import { ChatService } from '../../services/chat-service';
   styleUrl: './sidebar.scss',
   imports: [
     MatSidenavModule,
+    MatButtonModule,
     MatListModule,
     ChatWindow,
     SearchBar,
@@ -23,6 +26,12 @@ export class Sidebar implements OnInit {
   private chatService = inject(ChatService);
   conversations = signal<Conversation[]>([]);
   selectedConversation = signal<Conversation | null>(null);
+  conversationSearch = signal('');
+
+  filteredConversations = computed(() => {
+    const search = this.conversationSearch().toLowerCase();
+    return this.conversations().filter(conversation => conversation.title.toLowerCase().includes(search));
+  });
 
   ngOnInit(): void {
     this.chatService.loadConversations().subscribe({
