@@ -2,6 +2,6 @@
     <app-search-bar [value]="messageSearch()" (searchChange)="messageSearch.set($event)" />
     <div class="chat-window-body">
         <app-message-list [messages]="filteredMessages()" />
-        <app-chat-input />
+        <app-chat-input (messageSubmitted)="sendMessage($event)" />
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="message-list">
+<div class="message-list" #messageList>
     @for (message of messages(); track message.id) {
     <div class="message-row" [class.user-message]="message.role === 'user'">
         <app-chat-bubble [data]="message" />

@@ -9,16 +9,11 @@ app-search-bar {
     padding: 0px 0px 0px 10px;
 }
 
-app-message-list {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-}
-
 .chat-window {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    min-height: 0;
 }
 
 .chat-window-body {
@@ -30,4 +25,11 @@ app-message-list {
     align-self: center;
     width: 100%;
     max-width: 1000px;
+}
+
+app-message-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
 }
