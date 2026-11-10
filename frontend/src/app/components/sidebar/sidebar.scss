@@ -9,7 +9,8 @@
     height: 100vh;
     height: 100dvh;
     width: 300px;
-    background: var(--mat-sys-secondary-container);
+    border-right: 1px solid var(--mat-sys-outline);
+    background: var(--mat-sys-background);
 }
 
 .sidenav-layout {

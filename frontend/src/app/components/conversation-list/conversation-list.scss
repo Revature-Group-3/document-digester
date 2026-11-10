@@ -1,10 +1,12 @@
 mat-list-item.selected {
-    background-color: var(--mat-sys-primary-container);
+    background-color: var(--mat-sys-secondary-container);
     color: var(--mat-sys-on-secondary-container);
 }
 
 .conversation-list {
     padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .more-button {
