@@ -5,16 +5,28 @@
 }
 
 .sidenav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-sizing: border-box;
+    height: 100vh;
+    height: 100dvh;
     width: 300px;
     background: var(--mat-sys-secondary-container);
 }
 
-.container {
+.sidenav-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
 }
 
 mat-sidenav-content {
@@ -35,4 +47,13 @@ mat-sidenav {
 
 app-search-bar {
     align-self: center;
+    flex-shrink: 0;
+}
+
+app-conversation-list {
+    display: block;
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    overflow-y: auto;
 }
