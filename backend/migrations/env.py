@@ -1,13 +1,9 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
 from alembic import context
-
-from my_fast_api_app_with_langgraph_memory.settings import settings
-from my_fast_api_app_with_langgraph_memory.domain.students import Student
-from my_fast_api_app_with_langgraph_memory.domain.base import Base
+from document_digester.domain.base import Base
+from document_digester.settings import settings
+from sqlalchemy import engine_from_config, pool
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
