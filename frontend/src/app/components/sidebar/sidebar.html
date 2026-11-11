@@ -6,7 +6,13 @@
             <button mat-button="filled">+ New Conversation</button>
             <app-conversation-list [conversations]="filteredConversations()"
                 [selectedConversationId]="selectedConversation()?.conversationId ?? null"
-                (conversationSelected)="selectConversation($event)" />
+                (conversationSelected)="selectConversation($event)"
+                (conversationRenamed)="renameConversation($event.conversationId, $event.title)"
+                (conversationDeleted)="deleteConversation($event)" />
+                                
+
+                            
+
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
