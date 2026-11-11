@@ -51,4 +51,22 @@ export class Sidebar implements OnInit {
     ) ?? null;
     this.selectedConversation.set(conversation);
   }
+
+  renameConversation(conversationId: string, title: string): void {
+    this.conversations.update(conversations =>
+      conversations.map(c => (c.conversationId === conversationId ? { ...c, title } : c))
+    );
+    if (this.selectedConversation()?.conversationId === conversationId) {
+      this.selectConversation(conversationId);
+    }
+  }
+
+  deleteConversation(conversationId: string): void {
+    this.conversations.update(conversations =>
+      conversations.filter(c => c.conversationId !== conversationId)
+    );
+    if (this.selectedConversation()?.conversationId === conversationId) {
+      this.selectedConversation.set(this.conversations()[0] ?? null);
+    }
+  }
 }
