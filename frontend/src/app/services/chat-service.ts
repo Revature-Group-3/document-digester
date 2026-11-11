@@ -31,4 +31,14 @@ export class ChatService {
 
         return conversation?.messages ?? [];
     }
+
+    addMessage(conversationId: string, message: ChatMessage): void {
+        const conversation = this.conversations.find(
+            c => c.conversationId === conversationId
+        );
+
+        if (conversation) {
+            conversation.messages.push(message);
+        }
+    }
 }
