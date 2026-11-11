@@ -2,6 +2,8 @@ from logging.config import fileConfig
 
 from alembic import context
 from document_digester.domain.base import Base
+from document_digester.domain.developer import Developer
+from document_digester.domain.user_story import UserStory
 from document_digester.settings import settings
 from sqlalchemy import engine_from_config, pool
 
