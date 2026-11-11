@@ -1,0 +1,15 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+p {
+    display: flex;
+    justify-content: center;
+    margin-inline: 0;
+}
+
+mat-form-field {
+    width: 90%;
+    max-width: 450px;
+}

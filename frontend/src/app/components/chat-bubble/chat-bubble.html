@@ -1,0 +1,8 @@
+<mat-card class="{{ data()?.role }}-bubble">
+    <mat-card-content>
+        @if (data()?.role === 'user') {
+        <span>{{ data()?.createdAt | date:'shortTime' }}</span>
+        }
+        <p>{{ data()?.content }}</p>
+    </mat-card-content>
+</mat-card>

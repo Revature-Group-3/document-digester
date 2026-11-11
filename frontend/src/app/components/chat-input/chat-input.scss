@@ -1,0 +1,18 @@
+.flex-container {
+    display: flex;
+    gap: 15px;
+    width: 1;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    padding: 10px;
+}
+
+mat-form-field {
+    flex: 1;
+}
+
+mat-hint {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
