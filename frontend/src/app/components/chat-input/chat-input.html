@@ -1,0 +1,11 @@
+<div class="flex-container">
+    <mat-form-field appearance="outline">
+        <mat-label>Ask Document Digester</mat-label>
+        <input matInput type="text" (keydown.enter)="submitMessage()" [value]="value()"
+            (input)="value.set($any($event.target).value)">
+        <mat-hint>The Document Digester can make mistakes. Check important info.</mat-hint>
+    </mat-form-field>
+    <button mat-fab color="accent" (click)="submitMessage()">
+        <mat-icon>send</mat-icon>
+    </button>
+</div>

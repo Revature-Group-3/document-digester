@@ -1,0 +1,42 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    min-width: 0;
+}
+
+.message-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.message-row {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0 5px;
+    margin: 5px 0;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.message-row:not(.user-message) {
+    justify-content: flex-start;
+}
+
+app-chat-bubble {
+    display: block;
+    width: 90%;
+    min-width: 0;
+}

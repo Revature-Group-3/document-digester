@@ -1,0 +1,35 @@
+app-chat-input {
+    flex-shrink: 0;
+}
+
+app-search-bar {
+    display: block;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 0px 0px 0px 10px;
+}
+
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    min-height: 0;
+}
+
+.chat-window-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    box-sizing: border-box;
+    align-self: center;
+    width: 100%;
+    max-width: 1000px;
+}
+
+app-message-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
