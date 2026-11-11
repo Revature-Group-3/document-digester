@@ -58,3 +58,5 @@ assert results[0]["metadata"]["source"] == "signals", (
 )
 
 print("\nSemantic retrieval test passed!")
+
+#This acts like a manual "smoke" test to see if it could work with a database.
