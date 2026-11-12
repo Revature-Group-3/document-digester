@@ -1,6 +1,9 @@
 from document_digester.models import SearchResult
 
 def search_documents(query: str, top_k: int) -> list[SearchResult]:
+     # TODO: Replace mock results with RetrievalService.retrieve_hybrid()
+    # once the vector store is initialized.
+
     mock_results = [
         SearchResult(
             content="Signals allow nodes to communicate with one another.",
