@@ -1,0 +1,20 @@
+mat-list-item.selected {
+    background-color: var(--mat-sys-secondary-container);
+    color: var(--mat-sys-on-secondary-container);
+}
+
+.conversation-list {
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.more-button {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.conversation-item:hover .more-button,
+.conversation-item:focus-within .more-button {
+    opacity: 1;
+}
