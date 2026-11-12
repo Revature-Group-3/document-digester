@@ -22,7 +22,7 @@ export class ChatWindow {
 
   constructor() {
     effect(() => {
-      this.messages.set(this.conversation()?.messages ?? []);
+      this.messages.set([...(this.conversation()?.messages ?? [])]);
     });
   }
 
