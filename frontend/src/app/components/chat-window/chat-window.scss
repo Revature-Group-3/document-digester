@@ -33,3 +33,25 @@ app-message-list {
     flex: 1;
     min-height: 0;
 }
+
+/* Welcome layout reuses the existing Material theme and chat input. */
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: 24px;
+}
+.welcome-content { width: 100%; max-width: 700px; }
+.welcome h1 {
+    margin: 0 0 32px;
+    text-align: center;
+    font: var(--mat-sys-headline-large);
+    color: inherit;
+}
+@media (max-width: 600px) {
+    .welcome { padding: 16px; }
+    .welcome h1 { font: var(--mat-sys-headline-small); }
+}
