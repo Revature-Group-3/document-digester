@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from document_digester.settings import DOCS_DIR
+from document_digester.settings import settings
+
 
 def read_page(path: Path) -> dict:
     with open(path, encoding="utf-8") as f:
@@ -14,4 +15,4 @@ def read_page(path: Path) -> dict:
     }
 
 def load_pages() -> list[dict]:
-    return [read_page(path) for path in Path(DOCS_DIR).rglob("*.txt")]
+    return [read_page(path) for path in Path(settings.DOCS_DIR).rglob("*.txt")]
