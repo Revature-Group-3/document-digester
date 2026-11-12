@@ -12,7 +12,7 @@ from pathlib import Path
 
 import numpy as np
 
-from document_digester.evaluation.metrics import evaluate, load_golden_set
+from document_digester.evaluation.metrics import evaluate, load_golden_set, relevant_set
 
 UNDERLINE = re.compile(r"^([=\-~^\"#*+])\1{2,}$")
 DEFAULT_GOLDEN = Path(__file__).resolve().parents[3] / "eval" / "golden_set.jsonl"
@@ -107,7 +107,7 @@ def main():
         }
 
     def found(results):
-        return {q["id"] for q in golden if (q["page"], q["section"]) in results[q["id"]]}
+        return {q["id"] for q in golden if relevant_set(q) & set(results[q["id"]])}
 
     baseline_results = run(0.0)
     baseline_found = found(baseline_results)

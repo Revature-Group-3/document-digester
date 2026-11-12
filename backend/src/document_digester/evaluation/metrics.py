@@ -7,6 +7,11 @@ def load_golden_set(path):
     with Path(path).open(encoding="utf-8") as f:
         return [json.loads(line) for line in f if line.strip()]
 
+def relevant_set(question):
+    """The (page, section) pairs that count as a correct answer."""
+    pairs = {(question["page"], question["section"])}
+    pairs.update(tuple(pair) for pair in question.get("also_relevant", []))
+    return pairs
 
 def reciprocal_rank(ranked, relevant):
     for position, item in enumerate(ranked, start=1):
@@ -32,7 +37,7 @@ def evaluate(golden_set, results, k=5):
     scores = defaultdict(list)
 
     for question in golden_set:
-        relevant = {(question["page"], question["section"])}
+        relevant = relevant_set(question)
         ranked = results.get(question["id"], [])
 
         row = {

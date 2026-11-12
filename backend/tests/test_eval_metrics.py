@@ -56,3 +56,15 @@ def test_missing_results_count_as_misses():
 
     assert summary["all"]["hit@5"] == 0.0
     assert summary["all"]["mrr"] == 0.0
+
+
+def test_also_relevant_counts_as_correct():
+    golden = [{
+        "id": "q1", "page": SIGNALS[0], "section": SIGNALS[1], "type": "direct",
+        "also_relevant": [list(TIMER)],
+    }]
+
+    summary = evaluate(golden, {"q1": [OTHER, TIMER]}, k=5)
+
+    assert summary["all"]["hit@5"] == 1.0
+    assert summary["all"]["mrr"] == 0.5
