@@ -1,4 +1,5 @@
 from document_digester.settings import settings
+from langchain_core.documents import Document
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_ollama import OllamaEmbeddings
 from langchain_text_splitters import (
@@ -8,7 +9,7 @@ from langchain_text_splitters import (
 
 embeddings = OllamaEmbeddings(model=settings.EMBEDDING_MODEL)
 
-def chunk_page(html : str, metadata: dict) :
+def chunk_page(html: str, metadata: dict[str, str]) -> list[Document]:
     header_to_split_on=[
             ("##", "Header 2"),
             ("###", "Header 3")
@@ -29,20 +30,23 @@ def chunk_page(html : str, metadata: dict) :
         min_chunk_size=200
         )
     #3.
-    characterSplitter = RecursiveCharacterTextSplitter(
-        chunk_size = 1000,
-        chunk_overlap=200
+    character_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=200,
+        add_start_index=True,
     )
 
     #4.
     chunks = splitter.split_documents(sections)
-    chunks = characterSplitter.split_documents(chunks)
+    chunks = character_splitter.split_documents(chunks)
 
     for index, chunk in enumerate(chunks):
         chunk.metadata.update({
             "title": metadata["title"],
             "source": metadata["source"],
-            "chunk_idex": index,
+            "chunk_index": index,
         })
+        chunk.metadata.setdefault("Header 2", "")
+        chunk.metadata.setdefault("Header 3", "")
 
     return chunks
