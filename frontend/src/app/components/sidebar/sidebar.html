@@ -3,13 +3,13 @@
         <div class="sidenav-layout">
             <h2 class="sidebar-heading">Document Digester</h2>
             <app-search-bar [value]="conversationSearch()" (searchChange)="conversationSearch.set($event)" />
-            <button mat-button="filled">+ New Conversation</button>
+            <button mat-button="filled" class="new-conversation" (click)="startNewConversation()">+ New Conversation</button>
             <app-conversation-list [conversations]="filteredConversations()"
                 [selectedConversationId]="selectedConversation()?.conversationId ?? null"
                 (conversationSelected)="selectConversation($event)" />
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
-        <app-chat-window [conversation]="selectedConversation()" />
+        <app-chat-window [conversation]="selectedConversation()" (conversationCreated)="onConversationCreated($event)" />
     </mat-sidenav-content>
 </mat-sidenav-container>

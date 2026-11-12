@@ -37,12 +37,20 @@ export class Sidebar implements OnInit {
     this.chatService.loadConversations().subscribe({
       next: conversations => {
         this.conversations.set(conversations);
-        if (conversations.length > 0) {
-          this.selectConversation(conversations[0].conversationId);
-        }
       },
       error: error => console.error('Failed to load conversations', error),
     });
+  }
+
+  startNewConversation(): void {
+    this.selectedConversation.set(null);
+    this.conversationSearch.set('');
+  }
+
+  onConversationCreated(conversation: Conversation): void {
+    this.conversations.update(items => [conversation, ...items]);
+    this.conversationSearch.set('');
+    this.selectedConversation.set(conversation);
   }
 
   selectConversation(conversationId: string): void {

@@ -1,7 +1,16 @@
-<div class="chat-window">
-    <app-search-bar [value]="messageSearch()" (searchChange)="messageSearch.set($event)" />
-    <div class="chat-window-body">
-        <app-message-list [messages]="filteredMessages()" />
-        <app-chat-input (messageSubmitted)="sendMessage($event)" />
-    </div>
-</div>
+<main class="chat-window" [class.welcome-mode]="messages().length === 0" aria-label="Documentation conversation">
+    @if (messages().length === 0) {
+        <section class="welcome" aria-labelledby="welcome-title">
+            <div class="welcome-content">
+                <h1 id="welcome-title">Welcome! Ready when you are.</h1>
+                <app-chat-input (messageSubmitted)="sendMessage($event)" />
+            </div>
+        </section>
+    } @else {
+        <app-search-bar [value]="messageSearch()" (searchChange)="messageSearch.set($event)" />
+        <div class="chat-window-body">
+            <app-message-list [messages]="filteredMessages()" />
+            <app-chat-input (messageSubmitted)="sendMessage($event)" />
+        </div>
+    }
+</main>

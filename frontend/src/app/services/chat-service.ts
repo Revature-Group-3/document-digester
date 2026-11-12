@@ -17,10 +17,21 @@ export class ChatService {
     loadConversations(): Observable<Conversation[]> {
         return this.http.get<{ conversations: Conversation[] }>(this.apiUrl).pipe(
             map(data => {
-                this.conversations = data.conversations;
+                const existingIds = new Set(this.conversations.map(item => item.conversationId));
+                this.conversations = [...this.conversations, ...data.conversations.filter(item => !existingIds.has(item.conversationId))];
                 return this.conversations;
             })
         );
+    }
+
+    createConversation(firstMessage: string): Conversation {
+        const conversation: Conversation = {
+            conversationId: crypto.randomUUID(),
+            title: firstMessage.length > 48 ? firstMessage.slice(0, 48) + '…' : firstMessage,
+            messages: [],
+        };
+        this.conversations = [conversation, ...this.conversations];
+        return conversation;
     }
 
     // Careful not to call this before loadConversations()
