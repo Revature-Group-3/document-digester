@@ -2,7 +2,7 @@ import logging
 
 from fastapi import FastAPI, HTTPException
 from document_digester.models import SearchRequest, SearchResponse
-from document_digester.services.search import search_documents
+from document_digester.service.search import search_documents
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
