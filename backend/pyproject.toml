@@ -37,3 +37,6 @@ dev = [
     "httpx>=0.28.1",
     "pytest>=9.2.0",
 ]
+
+[tool.fastapi]
+entrypoint = "document_digester.api.main:app"

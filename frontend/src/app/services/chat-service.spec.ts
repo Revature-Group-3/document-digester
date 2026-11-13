@@ -58,7 +58,7 @@ describe('ChatService', () => {
       receivedResponse = result;
     });
 
-    const request = httpTestingController.expectOne('/api/search');
+    const request = httpTestingController.expectOne('/api/search/vector');
     expect(request.request.method).toBe('POST');
     expect(request.request.body).toEqual({ query: 'signals' });
     request.flush(response);
