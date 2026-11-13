@@ -10,7 +10,9 @@
                 <p>Score: {{ result.score }}</p>
             </div>
 
-            <a [href]="result.url" target="_blank" rel="noopener noreferrer">View Source</a>
+            @if (result.url) {
+                <a [href]="result.url" target="_blank" rel="noopener noreferrer">View Source</a>
+            }
         </mat-card-content>
     </mat-card>
     }

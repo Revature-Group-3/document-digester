@@ -34,6 +34,15 @@ app-message-list {
     min-height: 0;
 }
 
+.search-status,
+.search-error {
+    margin: 8px 16px;
+}
+
+.search-error {
+    color: var(--mat-sys-error);
+}
+
 /* Welcome layout reuses the existing Material theme and chat input. */
 .welcome {
     display: flex;
