@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 
 import { Conversation } from '../models/conversation';
 import { ChatMessage } from '../models/chat-message';
-import { SearchResult } from '../models/search-result';
+import { SearchResponse } from '../models/search-response';
 
 
 @Injectable({
@@ -12,11 +12,12 @@ import { SearchResult } from '../models/search-result';
 })
 export class ChatService {
     private http = inject(HttpClient);
-    private apiUrl = '/mock-conversations.json'
+    private conversationsUrl = '/mock-conversations.json';
+    private searchUrl = '/api/search';
     private conversations: Conversation[] = [];
 
     loadConversations(): Observable<Conversation[]> {
-        return this.http.get<{ conversations: Conversation[] }>(this.apiUrl).pipe(
+        return this.http.get<{ conversations: Conversation[] }>(this.conversationsUrl).pipe(
             map(data => {
                 const existingIds = new Set(this.conversations.map(item => item.conversationId));
                 this.conversations = [...this.conversations, ...data.conversations.filter(item => !existingIds.has(item.conversationId))];
@@ -54,10 +55,10 @@ export class ChatService {
         }
     }
 
-    searchDocuments(query: string): Observable<SearchResult[]> {
-        return this.http.post<SearchResult[]>(
-            'http://localhost:8000/search',
-            { content: query }
+    searchDocuments(query: string): Observable<SearchResponse> {
+        return this.http.post<SearchResponse>(
+            this.searchUrl,
+            { query }
         );
     }
 }

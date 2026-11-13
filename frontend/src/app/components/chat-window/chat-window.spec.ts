@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 import { ChatMessage } from '../../models/chat-message';
 import { Conversation } from '../../models/conversation';
@@ -25,6 +26,7 @@ describe('ChatWindow', () => {
           addMessage: (_conversationId: string, message: ChatMessage) => {
             conversation.messages.push(message);
           },
+          searchDocuments: () => of({ query: 'Hello', results: [] }),
         },
       }],
     }).compileComponents();
@@ -38,13 +40,15 @@ describe('ChatWindow', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should add the first message only once', () => {
+  it('should add the first user message only once and append the search response', () => {
     fixture.componentRef.setInput('conversation', conversation);
     fixture.detectChanges();
 
     component.sendMessage('Hello');
 
-    expect(conversation.messages).toHaveLength(1);
-    expect(component.messages()).toHaveLength(1);
+    expect(conversation.messages.filter(message => message.role === 'user')).toHaveLength(1);
+    expect(conversation.messages).toHaveLength(2);
+    expect(conversation.messages[1].role).toBe('assistant');
+    expect(component.messages()).toHaveLength(2);
   });
 });
