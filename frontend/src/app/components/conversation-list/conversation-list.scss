@@ -9,6 +9,11 @@ mat-list-item.selected {
     overflow-x: hidden;
 }
 
+.empty-state {
+    padding: 0 16px;
+    color: var(--mat-sys-on-surface-variant);
+}
+
 .more-button {
     opacity: 0;
     transition: opacity 0.15s ease;
