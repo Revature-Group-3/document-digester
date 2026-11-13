@@ -1,4 +1,5 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, output, signal, viewChild } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './chat-input.html',
 })
 export class ChatInput {
+  private input = viewChild<ElementRef<HTMLInputElement>>('input');
   messageSubmitted = output<string>();
   value = signal('');
 
@@ -20,5 +22,9 @@ export class ChatInput {
       this.messageSubmitted.emit(message);
       this.value.set('');
     }
+  }
+
+  focusInput() {
+    this.input()?.nativeElement.focus();
   }
 }

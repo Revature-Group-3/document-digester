@@ -1,4 +1,5 @@
-import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal, afterRenderEffect, viewChild } from '@angular/core';
+import { finalize } from 'rxjs';
 
 import { ChatService } from '../../services/chat-service';
 import { ChatInput } from '../chat-input/chat-input';
@@ -20,11 +21,19 @@ export class ChatWindow {
   conversationCreated = output<Conversation>();
   messages = signal<ChatMessage[]>([]);
   messageSearch = signal('');
+  searching = signal(false);
+  searchError = signal<string | null>(null);
+  chatInput = viewChild(ChatInput);
 
   constructor() {
     effect(() => {
       this.messages.set([...(this.conversation()?.messages ?? [])]);
       this.messageSearch.set('');
+    });
+
+    afterRenderEffect(() => {
+      this.conversation();
+      this.chatInput()?.focusInput();
     });
   }
 
@@ -71,6 +80,7 @@ export class ChatWindow {
     this.messages.set([...conversation.messages]);
     if (isNew) this.conversationCreated.emit(conversation);
 
+<<<<<<< HEAD
     // Request search results from backend
     this.chatService.searchDocuments(content).subscribe(results => {
       const assistantMessage: ChatMessage = {
@@ -86,6 +96,33 @@ export class ChatWindow {
       this.messages.set([...conversation.messages]);
     });
 
+=======
+    this.searching.set(true);
+    this.searchError.set(null);
+    this.chatService.searchDocuments(content).pipe(
+      finalize(() => this.searching.set(false))
+    ).subscribe({
+      next: response => {
+        const assistantMessage: ChatMessage = {
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          type: 'search-results',
+          results: response.results,
+          createdAt: Date.now().toString(),
+          status: 'complete',
+        };
+
+        this.chatService.addMessage(conversation.conversationId, assistantMessage);
+        if (this.conversation()?.conversationId === conversation.conversationId) {
+          this.messages.set([...conversation.messages]);
+        }
+      },
+      error: error => {
+        console.error('Failed to search documentation', error);
+        this.searchError.set('Could not search documentation. Please try again.');
+      },
+    });
+>>>>>>> origin/main
   }
 
 }

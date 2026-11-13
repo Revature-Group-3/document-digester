@@ -1,10 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { Conversation } from '../models/conversation';
 import { ChatMessage } from '../models/chat-message';
+<<<<<<< HEAD
 import { SearchResult } from '../models/search-result';
+=======
+import { SearchResponse } from '../models/search-response';
+>>>>>>> origin/main
 
 
 @Injectable({
@@ -12,17 +16,11 @@ import { SearchResult } from '../models/search-result';
 })
 export class ChatService {
     private http = inject(HttpClient);
-    private apiUrl = '/mock-conversations.json'
+    private searchUrl = '/api/search';
     private conversations: Conversation[] = [];
 
     loadConversations(): Observable<Conversation[]> {
-        return this.http.get<{ conversations: Conversation[] }>(this.apiUrl).pipe(
-            map(data => {
-                const existingIds = new Set(this.conversations.map(item => item.conversationId));
-                this.conversations = [...this.conversations, ...data.conversations.filter(item => !existingIds.has(item.conversationId))];
-                return this.conversations;
-            })
-        );
+        return of(this.conversations);
     }
 
     createConversation(firstMessage: string): Conversation {
@@ -35,7 +33,6 @@ export class ChatService {
         return conversation;
     }
 
-    // Careful not to call this before loadConversations()
     getMessages(conversationId: string): ChatMessage[] {
         const conversation = this.conversations.find(
             c => c.conversationId === conversationId
@@ -54,10 +51,17 @@ export class ChatService {
         }
     }
 
+<<<<<<< HEAD
     searchDocuments(query: string): Observable<SearchResult[]> {
         return this.http.post<SearchResult[]>(
             'http://localhost:8000/search',
             { content: query }
+=======
+    searchDocuments(query: string): Observable<SearchResponse> {
+        return this.http.post<SearchResponse>(
+            this.searchUrl,
+            { query }
+>>>>>>> origin/main
         );
     }
 }

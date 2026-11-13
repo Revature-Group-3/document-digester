@@ -21,12 +21,9 @@ describe('New conversation flow', () => {
 
   afterEach(() => http.verify());
 
-  function loadHistory() {
-    http.expectOne('/mock-conversations.json').flush({ conversations: [{
-      conversationId: 'saved', title: 'Saved conversation', messages: [{
-        id: 'old', role: 'user', content: 'Saved question', createdAt: '1', status: 'sent',
-      }],
-    }] });
+  function sendMessage(content: string) {
+    windowComponent().sendMessage(content);
+    http.expectOne('/api/search').flush({ query: content, results: [] });
     fixture.detectChanges();
   }
 
@@ -34,53 +31,41 @@ describe('New conversation flow', () => {
     return fixture.debugElement.query(By.directive(ChatWindow)).componentInstance;
   }
 
-  it('opens on the welcome screen even when history exists', () => {
-    loadHistory();
+  it('opens on the welcome screen without seeded conversations', () => {
     expect(fixture.componentInstance.selectedConversation()).toBeNull();
+    expect(fixture.componentInstance.conversations()).toEqual([]);
+    expect(fixture.nativeElement.textContent).toContain('No conversations yet.');
     expect(fixture.nativeElement.querySelector('h1').textContent).toContain('Welcome!');
   });
 
   it('creates a conversation on first submit and stores each message once', () => {
-    loadHistory();
-    windowComponent().sendMessage('How do signals work?');
-    fixture.detectChanges();
-    expect(fixture.componentInstance.conversations().length).toBe(2);
+    sendMessage('How do signals work?');
+    expect(fixture.componentInstance.conversations().length).toBe(1);
     expect(fixture.componentInstance.selectedConversation()?.title).toBe('How do signals work?');
-    expect(fixture.componentInstance.selectedConversation()?.messages.length).toBe(1);
+    expect(fixture.componentInstance.selectedConversation()?.messages.filter(message => message.role === 'user')).toHaveLength(1);
     expect(fixture.nativeElement.querySelector('h1')).toBeNull();
-    windowComponent().sendMessage('Another question');
-    fixture.detectChanges();
-    expect(windowComponent().messages().length).toBe(2);
-    expect(fixture.componentInstance.selectedConversation()?.messages.length).toBe(2);
+    sendMessage('Another question');
+    expect(windowComponent().messages().filter(message => message.role === 'user')).toHaveLength(2);
+    expect(fixture.componentInstance.selectedConversation()?.messages.filter(message => message.role === 'user')).toHaveLength(2);
   });
 
-  it('starts fresh via the button and lets users reopen saved conversations', () => {
-    loadHistory();
-    fixture.componentInstance.selectConversation('saved');
-    fixture.detectChanges();
+  it('starts fresh via the button and lets users reopen in-memory conversations', () => {
+    sendMessage('Saved question');
+    const conversationId = fixture.componentInstance.selectedConversation()!.conversationId;
     windowComponent().messageSearch.set('no match');
     fixture.nativeElement.querySelector('.new-conversation').click();
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('h1')).toBeTruthy();
     expect(windowComponent().messageSearch()).toBe('');
-    fixture.componentInstance.selectConversation('saved');
+    fixture.componentInstance.selectConversation(conversationId);
     fixture.detectChanges();
-    expect(windowComponent().messages()[0].content).toBe('Saved question');
-  });
-
-  it('preserves a new conversation if history finishes loading afterwards', () => {
-    windowComponent().sendMessage('First question');
-    fixture.detectChanges();
-    loadHistory();
-    expect(fixture.componentInstance.conversations().length).toBe(2);
-    expect(fixture.componentInstance.selectedConversation()?.messages.length).toBe(1);
+    expect(windowComponent().messages()[0]).toMatchObject({ role: 'user', content: 'Saved question' });
   });
 
   it('does not create a conversation for whitespace', () => {
-    loadHistory();
     windowComponent().sendMessage('   ');
     fixture.detectChanges();
-    expect(fixture.componentInstance.conversations().length).toBe(1);
+    expect(fixture.componentInstance.conversations().length).toBe(0);
     expect(fixture.componentInstance.selectedConversation()).toBeNull();
   });
 });
