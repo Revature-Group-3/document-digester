@@ -1,5 +1,4 @@
-
-from document_digester.retrieval import RetrievalService
+from document_digester.service.retrieval import RetrievalService
 from document_digester.settings import settings
 from langchain_chroma import Chroma
 from langchain_core.documents import Document

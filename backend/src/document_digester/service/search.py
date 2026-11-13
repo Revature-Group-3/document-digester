@@ -1,24 +1,62 @@
-from document_digester.models import SearchResult
+from sqlalchemy import select, or_
 
-def search_documents(query: str, top_k: int) -> list[SearchResult]:
-     # TODO: Replace mock results with RetrievalService.retrieve_hybrid()
-    # once the vector store is initialized.
+from document_digester.db.database import SessionLocal
+from document_digester.domain.user_story import UserStory
 
-    mock_results = [
-        SearchResult(
-            content="Signals allow nodes to communicate with one another.",
-            score=0.95,
-            source="Godot Documentation",
-            section="Using Signals",
-            url="https://docs.godotengine.org/"
-        ),
-        SearchResult(
-            content="Nodes can emit signals when events occur.",
-            score=0.87,
-            source="Godot Documentation",
-            section="Signals",
-            url="https://docs.godotengine.org/"
-        )
-    ]
 
-    return mock_results[:top_k]
+class SearchService:
+    def __init__(self, retrieval_service):
+        self.retrieval_service = retrieval_service
+
+    def vector_search(self, query: str, top_k: int):
+        return self.retrieval_service.retrieve_top_k(query, k=top_k)
+
+    def hybrid_search(self, query: str, top_k: int):
+        return self.retrieval_service.retrieve_hybrid(query, k=top_k)
+
+    def sql_search(self, query: str, top_k: int):
+        if not query or not query.strip():
+            raise ValueError("Query cannot be empty")
+
+        search_term = f"%{query.strip()}%"
+
+        with SessionLocal() as db:
+            statement = (
+                select(UserStory)
+                .where(
+                    or_(
+                        UserStory.title.ilike(search_term),
+                        UserStory.description.ilike(search_term)
+                    )
+                )
+                .limit(top_k)
+            )
+
+            stories = db.scalars(statement).all()
+
+            return [
+                {
+                    "text": f"{story.title}\n{story.description or ''}",
+                    "metadata": {
+                        "title": story.title,
+                        "source_name": "PostgreSQL User Stories"
+                    },
+                    "score": None
+                }
+                for story in stories
+            ]
+
+    def combined_search(self, query: str, top_k: int):
+        vector_results = self.vector_search(query, top_k)
+        sql_results = self.sql_search(query, top_k)
+
+        combined = []
+
+        for i in range(max(len(vector_results), len(sql_results))):
+            if i < len(vector_results):
+                combined.append(vector_results[i])
+
+            if i < len(sql_results):
+                combined.append(sql_results[i])
+
+        return combined[:top_k]
