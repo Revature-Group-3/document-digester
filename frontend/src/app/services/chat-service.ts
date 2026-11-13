@@ -4,11 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { Conversation } from '../models/conversation';
 import { ChatMessage } from '../models/chat-message';
-<<<<<<< HEAD
-import { SearchResult } from '../models/search-result';
-=======
 import { SearchResponse } from '../models/search-response';
->>>>>>> origin/main
 
 
 @Injectable({
@@ -51,17 +47,10 @@ export class ChatService {
         }
     }
 
-<<<<<<< HEAD
-    searchDocuments(query: string): Observable<SearchResult[]> {
-        return this.http.post<SearchResult[]>(
-            'http://localhost:8000/search',
-            { content: query }
-=======
     searchDocuments(query: string): Observable<SearchResponse> {
         return this.http.post<SearchResponse>(
             this.searchUrl,
             { query }
->>>>>>> origin/main
         );
     }
 }
