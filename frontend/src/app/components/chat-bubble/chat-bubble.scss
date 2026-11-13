@@ -16,3 +16,40 @@ mat-card {
     background-color: var(--mat-sys-background);
     width: 100%;
 }
+.message-content {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.sources {
+    margin-top: 8px;
+
+    summary {
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+    ol {
+        padding-left: 20px;
+    }
+
+    li {
+        margin-bottom: 8px;
+    }
+}
+
+.source-section {
+    opacity: 0.8;
+}
+
+.source-excerpt {
+    margin: 4px 0 0;
+    font-size: 0.875em;
+    opacity: 0.8;
+    white-space: pre-wrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

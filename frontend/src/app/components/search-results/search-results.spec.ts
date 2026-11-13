@@ -12,6 +12,7 @@ describe('SearchResults', () => {
 
     fixture = TestBed.createComponent(SearchResults);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('results', []);
     await fixture.whenStable();
   });
 

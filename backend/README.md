@@ -1,3 +1,36 @@
+# Running the RAG app with a local Ollama model
+
+1. Install Ollama (https://ollama.com/download), make sure it is running
+   (`ollama serve`, or the tray app), and pull both models:
+
+   ```powershell
+   ollama pull all-minilm   # embeddings (retrieval)
+   ollama pull llama3.2     # chat model (answer generation)
+   ```
+
+2. Index the docs (see below), then start the API from `backend/`:
+
+   ```powershell
+   uv run fastapi dev src/document_digester/api/main.py
+   ```
+
+3. Start the frontend from `frontend/` with `npm start` and open
+   http://localhost:4200. The dev server proxies `/api` to port 8000.
+
+`POST /api/chat` takes `{"query": "...", "top_k": 5, "history": [...]}`. It
+retrieves chunks with hybrid (vector + BM25) search, sends them to the Ollama
+LLM as context, and returns `{"answer": "...", "sources": [...]}`.
+
+Optional settings go in environment variables or `backend/.env`:
+
+| Variable | Default |
+| --- | --- |
+| `OLLAMA_BASE_URL` | `http://localhost:11434` |
+| `LLM_MODEL` | `llama3.2` (any model from `ollama list`) |
+| `LLM_TEMPERATURE` | `0.2` |
+| `EMBEDDING_MODEL` | `all-minilm` (changing it requires re-indexing) |
+| `DATABASE_URL` | unset. Only `/api/search/sql` and `/api/search/combined` use PostgreSQL. |
+
 # Indexing the Godot documentation
 
 The backend stores document chunks in a persistent local Chroma database. It

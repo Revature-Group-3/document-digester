@@ -11,6 +11,9 @@ from sqlalchemy import engine_from_config, pool
 # access to the values within the .ini file in use.
 config = context.config
 
+if not settings.DATABASE_URL:
+    raise RuntimeError("DATABASE_URL must be set to run migrations.")
+
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 # Interpret the config file for Python logging.

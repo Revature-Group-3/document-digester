@@ -45,15 +45,11 @@ export class ChatWindow {
         return message.content.toLowerCase().includes(search);
       }
 
-      if (message.type === 'search-results') {
-        return message.results.some(result =>
-          [
-            result.content,
-            result.source,
-            result.section,
-            result.url
-          ].some(value => (value ?? '').toLowerCase().includes(search))
-        );
+      if (message.type === 'answer') {
+        return [
+          message.content,
+          ...message.sources.flatMap(source => [source.content, source.source, source.section, source.url]),
+        ].some(value => (value ?? '').toLowerCase().includes(search));
       }
 
       return false;
@@ -67,12 +63,15 @@ export class ChatWindow {
     const isNew = !this.conversation();
     const conversation = this.conversation() ?? this.chatService.createConversation(content);
 
+    // Conversation history sent to the LLM (excludes the message being sent).
+    const previousMessages = [...conversation.messages];
+
     const message: ChatMessage = {
       id: crypto.randomUUID(),
       role: 'user',
       type: 'text',
       content: content,
-      createdAt: Date.now().toString(),
+      createdAt: new Date().toISOString(),
       status: 'sent',
     };
 
@@ -82,16 +81,17 @@ export class ChatWindow {
 
     this.searching.set(true);
     this.searchError.set(null);
-    this.chatService.searchDocuments(content).pipe(
+    this.chatService.askQuestion(content, previousMessages).pipe(
       finalize(() => this.searching.set(false))
     ).subscribe({
       next: response => {
         const assistantMessage: ChatMessage = {
           id: crypto.randomUUID(),
           role: 'assistant',
-          type: 'search-results',
-          results: response.results,
-          createdAt: Date.now().toString(),
+          type: 'answer',
+          content: response.answer,
+          sources: response.sources,
+          createdAt: new Date().toISOString(),
           status: 'complete',
         };
 
@@ -101,8 +101,10 @@ export class ChatWindow {
         }
       },
       error: error => {
-        console.error('Failed to search documentation', error);
-        this.searchError.set('Could not search documentation. Please try again.');
+        console.error('Failed to get an answer', error);
+        message.status = 'failed';
+        const detail = typeof error?.error?.detail === 'string' ? ` (${error.error.detail})` : '';
+        this.searchError.set(`Could not get an answer. Please try again.${detail}`);
       },
     });
   }

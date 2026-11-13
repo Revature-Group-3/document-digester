@@ -2,12 +2,31 @@
 
 <mat-card class="{{ message.role }}-bubble">
     <mat-card-content>
+        <span>{{ message.createdAt | date:'shortTime' }}</span>
         @if (message.type === 'text') {
-        <span>{{ message.createdAt | date:'shortTime' }}</span>
         <p class="message-content">{{ message.content }}</p>
-        } @else if (message.type === 'search-results') {
-        <span>{{ message.createdAt | date:'shortTime' }}</span>
-        <app-search-results [results]="message.results" />
+        } @else if (message.type === 'answer') {
+        <p class="message-content answer">{{ message.content }}</p>
+        @if (message.sources.length > 0) {
+        <details class="sources">
+            <summary>Sources ({{ message.sources.length }})</summary>
+            <ol>
+                @for (source of message.sources; track $index) {
+                <li>
+                    @if (source.url) {
+                    <a [href]="source.url" target="_blank" rel="noopener noreferrer">{{ source.source }}</a>
+                    } @else {
+                    <strong>{{ source.source }}</strong>
+                    }
+                    @if (source.section) {
+                    <span class="source-section"> · {{ source.section }}</span>
+                    }
+                    <p class="source-excerpt">{{ source.content }}</p>
+                </li>
+                }
+            </ol>
+        </details>
+        }
         }
     </mat-card-content>
 </mat-card>

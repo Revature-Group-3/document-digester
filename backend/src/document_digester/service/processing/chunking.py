@@ -1,13 +1,12 @@
-from document_digester.settings import settings
+from document_digester.service.ingestion.vectorization import create_embeddings
 from langchain_core.documents import Document
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain_ollama import OllamaEmbeddings
 from langchain_text_splitters import (
     MarkdownHeaderTextSplitter,
     RecursiveCharacterTextSplitter,
 )
 
-embeddings = OllamaEmbeddings(model=settings.EMBEDDING_MODEL)
+embeddings = create_embeddings()
 
 def chunk_page(html: str, metadata: dict[str, str]) -> list[Document]:
     header_to_split_on=[

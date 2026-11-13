@@ -9,14 +9,20 @@ from langchain_ollama import OllamaEmbeddings
 COLLECTION_NAME = "godot_docs"
 
 
+def create_embeddings() -> OllamaEmbeddings:
+    return OllamaEmbeddings(
+        model=settings.EMBEDDING_MODEL,
+        base_url=settings.OLLAMA_BASE_URL,
+    )
+
+
 def create_vector_store() -> Chroma:
     persist_directory = Path(settings.CHROMA_PERSIST_DIRECTORY)
     persist_directory.mkdir(parents=True, exist_ok=True)
 
-    embeddings = OllamaEmbeddings(model=settings.EMBEDDING_MODEL)
     return Chroma(
         collection_name=COLLECTION_NAME,
-        embedding_function=embeddings,
+        embedding_function=create_embeddings(),
         persist_directory=str(persist_directory),
     )
 

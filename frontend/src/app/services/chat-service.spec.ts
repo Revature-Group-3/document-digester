@@ -3,7 +3,8 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { TestBed } from '@angular/core/testing';
 
 import { Conversation } from '../models/conversation';
-import { SearchResponse } from '../models/search-response';
+import { ChatMessage } from '../models/chat-message';
+import { ChatResponse } from '../models/chat-response';
 import { ChatService } from './chat-service';
 
 describe('ChatService', () => {
@@ -41,10 +42,11 @@ describe('ChatService', () => {
     expect(loadedConversations).toEqual([conversation]);
   });
 
-  it('should send a search query and return the backend response', () => {
-    const response = {
+  it('should post the question with prior history and return the backend answer', () => {
+    const response: ChatResponse = {
       query: 'signals',
-      results: [{
+      answer: 'Signals allow nodes to communicate [1].',
+      sources: [{
         content: 'Signals allow nodes to communicate.',
         score: 0.95,
         source: 'Godot Documentation',
@@ -52,15 +54,22 @@ describe('ChatService', () => {
         url: 'https://docs.godotengine.org/',
       }],
     };
-    let receivedResponse: SearchResponse | undefined;
+    const previous: ChatMessage[] = [
+      { id: '1', role: 'user', type: 'text', content: 'Hi', createdAt: '', status: 'sent' },
+      { id: '2', role: 'user', type: 'text', content: 'Broken', createdAt: '', status: 'failed' },
+    ];
+    let receivedResponse: ChatResponse | undefined;
 
-    service.searchDocuments('signals').subscribe(result => {
+    service.askQuestion('signals', previous).subscribe(result => {
       receivedResponse = result;
     });
 
-    const request = httpTestingController.expectOne('/api/search');
+    const request = httpTestingController.expectOne('/api/chat');
     expect(request.request.method).toBe('POST');
-    expect(request.request.body).toEqual({ query: 'signals' });
+    expect(request.request.body).toEqual({
+      query: 'signals',
+      history: [{ role: 'user', content: 'Hi' }],
+    });
     request.flush(response);
 
     expect(receivedResponse).toEqual(response);

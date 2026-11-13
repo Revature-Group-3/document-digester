@@ -61,6 +61,7 @@ export class Sidebar implements OnInit {
   }
 
   renameConversation(conversationId: string, title: string): void {
+    this.chatService.renameConversation(conversationId, title);
     this.conversations.update(conversations =>
       conversations.map(c => (c.conversationId === conversationId ? { ...c, title } : c))
     );
@@ -70,6 +71,7 @@ export class Sidebar implements OnInit {
   }
 
   deleteConversation(conversationId: string): void {
+    this.chatService.deleteConversation(conversationId);
     this.conversations.update(conversations =>
       conversations.filter(c => c.conversationId !== conversationId)
     );

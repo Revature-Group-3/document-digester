@@ -63,7 +63,7 @@ class RetrievalService:
 
         #Latency results
         elapsed_ms = (perf_counter() - start) * 1000
-        print(f"Retreival Latency: {elapsed_ms:.2f} ms")
+        print(f"Retrieval Latency: {elapsed_ms:.2f} ms")
         
         #We can return latency anywhere by grabbing the elapsed_ms
 
@@ -72,7 +72,10 @@ class RetrievalService:
                 "rank": index,
                 "text": document.page_content,
                 "metadata": document.metadata,
-                "distance": float(distance)
+                "distance": float(distance),
+                # Lower distance = closer match; expose a 0..1 "higher is better"
+                # score so the API's `score` field is populated for vector search.
+                "score": 1.0 / (1.0 + float(distance)),
             }
             for index, (document, distance)
             in enumerate(matches, start=1)

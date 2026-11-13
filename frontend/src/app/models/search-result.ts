@@ -1,6 +1,6 @@
 export interface SearchResult {
     content: string;
-    score: number;
+    score: number | null;
     source: string;
     section: string;
     url: string | null;

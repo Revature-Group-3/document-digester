@@ -18,8 +18,9 @@ export interface UserMessage extends BaseChatMessage {
 
 export interface AssistantMessage extends BaseChatMessage {
     role: 'assistant';
-    type: 'search-results';
-    results: SearchResult[];
+    type: 'answer';
+    content: string;
+    sources: SearchResult[];
 }
 
 export type ChatMessage = UserMessage | AssistantMessage;

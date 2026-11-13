@@ -11,7 +11,7 @@
         <div class="chat-window-body">
             <app-message-list [messages]="filteredMessages()" />
             @if (searching()) {
-                <p class="search-status" role="status">Searching documentation...</p>
+                <p class="search-status" role="status">Thinking...</p>
             }
             @if (searchError()) {
                 <p class="search-error" role="alert">{{ searchError() }}</p>

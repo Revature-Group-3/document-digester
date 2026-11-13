@@ -1,6 +1,6 @@
 from sqlalchemy import select, or_
 
-from document_digester.db.database import SessionLocal
+from document_digester.db.database import DatabaseNotConfiguredError, SessionLocal
 from document_digester.domain.user_story import UserStory
 
 
@@ -17,6 +17,9 @@ class SearchService:
     def sql_search(self, query: str, top_k: int):
         if not query or not query.strip():
             raise ValueError("Query cannot be empty")
+
+        if not 1 <= top_k <= 20:
+            raise ValueError("k must be between 1 and 20")
 
         search_term = f"%{query.strip()}%"
 
@@ -48,7 +51,10 @@ class SearchService:
 
     def combined_search(self, query: str, top_k: int):
         vector_results = self.vector_search(query, top_k)
-        sql_results = self.sql_search(query, top_k)
+        try:
+            sql_results = self.sql_search(query, top_k)
+        except DatabaseNotConfiguredError:
+            sql_results = []
 
         combined = []
 

@@ -4,15 +4,17 @@ import { Observable, of } from 'rxjs';
 
 import { Conversation } from '../models/conversation';
 import { ChatMessage } from '../models/chat-message';
-import { SearchResponse } from '../models/search-response';
+import { ChatResponse, ChatTurn } from '../models/chat-response';
 
+/** How many earlier messages are sent to the LLM as conversation history. */
+const MAX_HISTORY_MESSAGES = 10;
 
 @Injectable({
     providedIn: 'root'
 })
 export class ChatService {
     private http = inject(HttpClient);
-    private searchUrl = '/api/search';
+    private chatUrl = '/api/chat';
     private conversations: Conversation[] = [];
 
     loadConversations(): Observable<Conversation[]> {
@@ -27,6 +29,17 @@ export class ChatService {
         };
         this.conversations = [conversation, ...this.conversations];
         return conversation;
+    }
+
+    renameConversation(conversationId: string, title: string): void {
+        const conversation = this.conversations.find(c => c.conversationId === conversationId);
+        if (conversation) {
+            conversation.title = title;
+        }
+    }
+
+    deleteConversation(conversationId: string): void {
+        this.conversations = this.conversations.filter(c => c.conversationId !== conversationId);
     }
 
     getMessages(conversationId: string): ChatMessage[] {
@@ -47,10 +60,13 @@ export class ChatService {
         }
     }
 
-    searchDocuments(query: string): Observable<SearchResponse> {
-        return this.http.post<SearchResponse>(
-            this.searchUrl,
-            { query }
-        );
+    /** Ask the backend RAG pipeline (retrieval + local Ollama LLM) a question. */
+    askQuestion(query: string, previousMessages: ChatMessage[] = []): Observable<ChatResponse> {
+        const history: ChatTurn[] = previousMessages
+            .filter(message => message.status !== 'failed')
+            .slice(-MAX_HISTORY_MESSAGES)
+            .map(message => ({ role: message.role, content: message.content }));
+
+        return this.http.post<ChatResponse>(this.chatUrl, { query, history });
     }
 }

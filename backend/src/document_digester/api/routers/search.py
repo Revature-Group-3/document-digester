@@ -8,6 +8,7 @@ from document_digester.api.schemas import (
     SearchResponse,
     SearchResult,
 )
+from document_digester.db.database import DatabaseNotConfiguredError
 from document_digester.service.search import SearchService
 
 
@@ -157,6 +158,12 @@ async def sql_search(
     except ValueError as error:
         raise HTTPException(
             status_code=400,
+            detail=str(error)
+        )
+
+    except DatabaseNotConfiguredError as error:
+        raise HTTPException(
+            status_code=503,
             detail=str(error)
         )
 

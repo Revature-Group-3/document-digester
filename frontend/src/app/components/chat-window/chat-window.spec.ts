@@ -26,7 +26,7 @@ describe('ChatWindow', () => {
           addMessage: (_conversationId: string, message: ChatMessage) => {
             conversation.messages.push(message);
           },
-          searchDocuments: () => of({ query: 'Hello', results: [] }),
+          askQuestion: () => of({ query: 'Hello', answer: 'Hi there!', sources: [] }),
         },
       }],
     }).compileComponents();
@@ -40,7 +40,7 @@ describe('ChatWindow', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should add the first user message only once and append the search response', () => {
+  it('should add the first user message only once and append the LLM answer', () => {
     fixture.componentRef.setInput('conversation', conversation);
     fixture.detectChanges();
 
@@ -49,6 +49,7 @@ describe('ChatWindow', () => {
     expect(conversation.messages.filter(message => message.role === 'user')).toHaveLength(1);
     expect(conversation.messages).toHaveLength(2);
     expect(conversation.messages[1].role).toBe('assistant');
+    expect(conversation.messages[1].content).toBe('Hi there!');
     expect(component.messages()).toHaveLength(2);
   });
 });

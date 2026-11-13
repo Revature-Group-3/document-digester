@@ -15,9 +15,8 @@ def run_pipeline():
     return chunked_list
 
 if __name__=="__main__":
-    print(len(run_pipeline()))
-
     chunks = run_pipeline()
+    print(len(chunks))
     print(chunks[5])
     print(max(len(c.page_content) for c in chunks))           # should be ≤ 1000
     print(sum(1 for c in chunks if len(c.page_content) < 200)) # tiny ones, should be about 0
