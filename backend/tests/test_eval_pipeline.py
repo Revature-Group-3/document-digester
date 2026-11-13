@@ -62,3 +62,32 @@ def test_answerable_only_keeps_questions_whose_page_is_indexed():
         {"id": "q3", "page": "c", "section": "w"},
     ]
     assert [q["id"] for q in answerable(golden, {"a"})] == ["q1", "q2"]
+
+
+def test_baseline_splits_sphinx_text_pages(tmp_path):
+    from document_digester.evaluation.baseline import split_sections
+
+    page = tmp_path / "signals.txt"
+    page.write_text(
+        "Using signals\n"
+        f"{SIGNALS_URL}\n"
+        "*************\n"
+        "Intro text.\n"
+        "\n"
+        "Connecting a signal via code\n"
+        "============================\n"
+        "Call connect().\n"
+        "\n"
+        "Declaring\n"
+        "---------\n"
+        "Use the signal keyword.\n",
+        encoding="utf-8",
+    )
+
+    sections = [(p, s) for p, s, _ in split_sections(page)]
+    page_name = "getting_started/step_by_step/signals"
+    assert sections == [
+        (page_name, "using signals"),
+        (page_name, "connecting a signal via code"),
+        (page_name, "declaring"),
+    ]

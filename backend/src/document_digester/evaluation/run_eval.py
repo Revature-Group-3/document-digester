@@ -15,6 +15,7 @@ from time import perf_counter
 
 from document_digester.evaluation.adapter import chunk_labels, normalize_question, page_from_url
 from document_digester.evaluation.metrics import evaluate, load_golden_set, relevant_set
+from document_digester.retrieval import RetrievalService
 
 BACKEND_DIR = Path(__file__).resolve().parents[3]
 DEFAULT_GOLDEN = BACKEND_DIR / "eval" / "golden_set.jsonl"
@@ -71,8 +72,6 @@ def answerable(golden, pages):
 def build_retriever(chroma_dir, collection):
     from langchain_chroma import Chroma
     from langchain_ollama import OllamaEmbeddings
-
-    from document_digester.retrieval import RetrievalService
 
     embeddings = OllamaEmbeddings(model=os.getenv("EMBEDDING_MODEL", "all-minilm"))
     store = Chroma(collection_name=collection, embedding_function=embeddings, persist_directory=str(chroma_dir))
