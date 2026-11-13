@@ -1,8 +1,13 @@
-<mat-card class="{{ data()?.role }}-bubble">
+@let message = data();
+
+<mat-card class="{{ message.role }}-bubble">
     <mat-card-content>
-        @if (data()?.role === 'user') {
-        <span>{{ data()?.createdAt | date:'shortTime' }}</span>
+        @if (message.type === 'text') {
+        <span>{{ message.createdAt | date:'shortTime' }}</span>
+        <p class="message-content">{{ message.content }}</p>
+        } @else if (message.type === 'search-results') {
+        <span>{{ message.createdAt | date:'shortTime' }}</span>
+        <app-search-results [results]="message.results" />
         }
-        <p>{{ data()?.content }}</p>
     </mat-card-content>
 </mat-card>

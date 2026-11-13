@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 
 import { Conversation } from '../models/conversation';
 import { ChatMessage } from '../models/chat-message';
+import { SearchResult } from '../models/search-result';
 
 
 @Injectable({
@@ -51,5 +52,12 @@ export class ChatService {
         if (conversation) {
             conversation.messages.push(message);
         }
+    }
+
+    searchDocuments(query: string): Observable<SearchResult[]> {
+        return this.http.post<SearchResult[]>(
+            'http://localhost:8000/search',
+            { content: query }
+        );
     }
 }
