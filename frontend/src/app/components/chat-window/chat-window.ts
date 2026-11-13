@@ -30,7 +30,25 @@ export class ChatWindow {
 
   filteredMessages = computed(() => {
     const search = this.messageSearch().toLowerCase();
-    return this.messages().filter(message => message.content.toLowerCase().includes(search));
+
+    return this.messages().filter(message => {
+      if (message.type === 'text') {
+        return message.content.toLowerCase().includes(search);
+      }
+
+      if (message.type === 'search-results') {
+        return message.results.some(result =>
+          [
+            result.content,
+            result.source,
+            result.section,
+            result.url
+          ].some(value => (value ?? '').toLowerCase().includes(search))
+        );
+      }
+
+      return false;
+    });
   });
 
   sendMessage(contentInput: string) {
@@ -43,7 +61,8 @@ export class ChatWindow {
     const message: ChatMessage = {
       id: crypto.randomUUID(),
       role: 'user',
-      content,
+      type: 'text',
+      content: content,
       createdAt: Date.now().toString(),
       status: 'sent',
     };
@@ -51,5 +70,22 @@ export class ChatWindow {
     this.chatService.addMessage(conversation.conversationId, message);
     this.messages.set([...conversation.messages]);
     if (isNew) this.conversationCreated.emit(conversation);
+
+    // Request search results from backend
+    this.chatService.searchDocuments(content).subscribe(results => {
+      const assistantMessage: ChatMessage = {
+        id: crypto.randomUUID(),
+        role: 'assistant',
+        type: 'search-results',
+        results,
+        createdAt: Date.now().toString(),
+        status: 'complete',
+      };
+
+      this.chatService.addMessage(conversation.conversationId, assistantMessage);
+      this.messages.set([...conversation.messages]);
+    });
+
   }
+
 }

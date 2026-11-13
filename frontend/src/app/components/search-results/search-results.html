@@ -1,0 +1,17 @@
+<div class="search-results">
+    @for (result of results(); track $index) {
+    <mat-card appearance="outlined">
+        <mat-card-content>
+            <h3>{{ result.source }}</h3>
+            <p>{{ result.content }}</p>
+
+            <div class="result-details">
+                <p>Section: {{ result.section }}</p>
+                <p>Score: {{ result.score }}</p>
+            </div>
+
+            <a [href]="result.url" target="_blank" rel="noopener noreferrer">View Source</a>
+        </mat-card-content>
+    </mat-card>
+    }
+</div>
