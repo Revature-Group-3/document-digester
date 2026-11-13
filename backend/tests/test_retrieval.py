@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 from langchain_core.documents import Document
 
-from document_digester.retrieval import RetrievalService
+from document_digester.service.retrieval import RetrievalService
 
 
 class FakeVectorStore:
