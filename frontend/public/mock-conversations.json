@@ -9,6 +9,7 @@
         {
           "id": "msg_001",
           "role": "user",
+          "type": "text",
           "content": "I'm planning a small community event. Can you help me put together a checklist?",
           "createdAt": "2026-11-09T14:00:00Z",
           "status": "sent"
@@ -16,13 +17,30 @@
         {
           "id": "msg_002",
           "role": "assistant",
-          "content": "Absolutely. Start with the venue, date and time, budget, permits, volunteers, promotion, supplies, and an event-day schedule. What kind of event are you organizing?",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "Start by identifying the venue, date and time, estimated budget, permits, volunteers, promotion strategy, required supplies, and event-day schedule.",
+              "score": 0.97,
+              "source": "Community Event Planning Guide",
+              "section": "Event Planning Checklist",
+              "url": "https://example.com/community-event-planning"
+            },
+            {
+              "content": "A successful community event begins with a clear purpose, an appropriate venue, a realistic budget, and a plan for coordinating volunteers.",
+              "score": 0.91,
+              "source": "Neighborhood Organizer Handbook",
+              "section": "Getting Started",
+              "url": "https://example.com/neighborhood-organizer"
+            }
+          ],
           "createdAt": "2026-11-09T14:01:00Z",
           "status": "complete"
         },
         {
           "id": "msg_003",
           "role": "user",
+          "type": "text",
           "content": "A neighborhood meetup in a local park, probably around 30 people.",
           "createdAt": "2026-11-09T14:03:00Z",
           "status": "sent"
@@ -30,13 +48,30 @@
         {
           "id": "msg_004",
           "role": "assistant",
-          "content": "For 30 people in a park, start by checking reservation rules, choosing a date and rain plan, estimating refreshment costs, recruiting volunteers, and sharing RSVP details with neighbors.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "For a gathering of approximately 30 people, check whether the park requires reservations or permits. Confirm the date, identify an alternative in case of rain, and determine whether seating and restroom facilities are available.",
+              "score": 0.98,
+              "source": "Parks and Recreation Event Guide",
+              "section": "Small Group Gatherings",
+              "url": "https://example.com/parks-event-guide"
+            },
+            {
+              "content": "Estimate refreshments and supply costs, recruit volunteers to help with setup and cleanup, and communicate RSVP information to attendees ahead of time.",
+              "score": 0.93,
+              "source": "Community Event Planning Guide",
+              "section": "Budget and Volunteers",
+              "url": "https://example.com/community-event-planning"
+            }
+          ],
           "createdAt": "2026-11-09T14:04:00Z",
           "status": "complete"
         },
         {
           "id": "msg_005",
           "role": "user",
+          "type": "text",
           "content": "Could you suggest a few low-cost activities that don't need special equipment?",
           "createdAt": "2026-11-09T14:08:00Z",
           "status": "sent"
@@ -44,7 +79,16 @@
         {
           "id": "msg_006",
           "role": "assistant",
-          "content": "Try conversation prompt cards, neighborhood trivia, a group walk, a community idea board, or a casual show-and-tell about favorite local spots. These are easy to join without special equipment.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "Conversation prompt cards, neighborhood trivia, group walks, community idea boards, and casual show-and-tell activities are inexpensive ways to encourage participation.",
+              "score": 0.96,
+              "source": "Community Engagement Activities",
+              "section": "Low-Cost Group Activities",
+              "url": "https://example.com/community-activities"
+            }
+          ],
           "createdAt": "2026-11-09T14:09:00Z",
           "status": "complete"
         }
@@ -59,6 +103,7 @@
         {
           "id": "msg_007",
           "role": "user",
+          "type": "text",
           "content": "Can you explain what a REST API is in plain English?",
           "createdAt": "2026-11-09T11:00:00Z",
           "status": "sent"
@@ -66,13 +111,30 @@
         {
           "id": "msg_008",
           "role": "assistant",
-          "content": "A REST API is a set of conventions that lets software communicate over HTTP. One application makes a request to a resource, and another application sends back a response, often as JSON.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "A REST API is an architectural style for communication between software applications. It commonly uses HTTP methods such as GET, POST, PUT, PATCH, and DELETE to interact with resources.",
+              "score": 0.99,
+              "source": "REST API Fundamentals",
+              "section": "Introduction to REST",
+              "url": "https://example.com/rest-fundamentals"
+            },
+            {
+              "content": "REST APIs frequently exchange data in JSON format. A client sends a request to a server endpoint, and the server returns a response containing the requested information or the result of an operation.",
+              "score": 0.95,
+              "source": "Web API Development Guide",
+              "section": "HTTP Requests and Responses",
+              "url": "https://example.com/web-api-guide"
+            }
+          ],
           "createdAt": "2026-11-09T11:01:00Z",
           "status": "complete"
         },
         {
           "id": "msg_009",
           "role": "user",
+          "type": "text",
           "content": "So would Angular use an API to talk to my Java Spring Boot backend?",
           "createdAt": "2026-11-09T11:10:00Z",
           "status": "sent"
@@ -80,7 +142,23 @@
         {
           "id": "msg_010",
           "role": "assistant",
-          "content": "Exactly. Angular can send an HTTP request to a Spring Boot endpoint. Spring Boot handles the request, runs the relevant logic, and returns data—often as JSON—which Angular can then display.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "Angular applications can communicate with Spring Boot backends using HttpClient to send HTTP requests to REST endpoints. Spring Boot processes these requests and returns data, commonly serialized as JSON.",
+              "score": 0.99,
+              "source": "Angular and Spring Boot Integration",
+              "section": "Frontend-Backend Communication",
+              "url": "https://example.com/angular-spring-integration"
+            },
+            {
+              "content": "A typical full-stack application separates responsibilities: Angular handles the user interface, while Spring Boot handles business logic, database access, authentication, and API responses.",
+              "score": 0.94,
+              "source": "Full-Stack Application Architecture",
+              "section": "Application Layers",
+              "url": "https://example.com/fullstack-architecture"
+            }
+          ],
           "createdAt": "2026-11-09T11:11:00Z",
           "status": "complete"
         }
@@ -95,6 +173,7 @@
         {
           "id": "msg_011",
           "role": "user",
+          "type": "text",
           "content": "I'd like to get back into reading. Any recommendations for accessible books about political history?",
           "createdAt": "2026-11-09T07:00:00Z",
           "status": "sent"
@@ -102,13 +181,30 @@
         {
           "id": "msg_012",
           "role": "assistant",
-          "content": "Narrative histories focused on a particular election, movement, or political figure can be more approachable than broad academic surveys. Starting with a topic you already find interesting is a good way to branch out.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "Narrative political histories focused on individual elections, social movements, and influential political figures can provide accessible introductions to complex historical developments.",
+              "score": 0.96,
+              "source": "Guide to Reading Political History",
+              "section": "Choosing an Accessible History Book",
+              "url": "https://example.com/political-history-reading"
+            },
+            {
+              "content": "Readers new to political history may find it easier to begin with a topic they already find interesting rather than starting with a broad academic survey.",
+              "score": 0.91,
+              "source": "Historical Reading Recommendations",
+              "section": "Getting Started",
+              "url": "https://example.com/history-reading-guide"
+            }
+          ],
           "createdAt": "2026-11-09T07:01:00Z",
           "status": "complete"
         },
         {
           "id": "msg_013",
           "role": "user",
+          "type": "text",
           "content": "I'd prefer something focused on American political institutions.",
           "createdAt": "2026-11-09T07:10:00Z",
           "status": "sent"
@@ -116,7 +212,23 @@
         {
           "id": "msg_014",
           "role": "assistant",
-          "content": "Look for accessible introductions to Congress, the presidency, federalism, and the Supreme Court. A book focused on how a bill becomes law—or how congressional committees operate—could be a practical starting point.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "An introduction to the United States Congress can explain the legislative process, committee structure, congressional leadership, and the relationship between the House and Senate.",
+              "score": 0.98,
+              "source": "Congressional Research Guide",
+              "section": "The Legislative Branch",
+              "url": "https://example.com/congress-guide"
+            },
+            {
+              "content": "Books about the presidency, federalism, and the Supreme Court offer accessible ways to explore how American political institutions divide power and influence public policy.",
+              "score": 0.94,
+              "source": "American Government Reading Guide",
+              "section": "Constitutional Institutions",
+              "url": "https://example.com/american-government-guide"
+            }
+          ],
           "createdAt": "2026-11-09T07:11:00Z",
           "status": "complete"
         }
@@ -131,6 +243,7 @@
         {
           "id": "msg_015",
           "role": "user",
+          "type": "text",
           "content": "What's the difference between WHERE and HAVING in SQL?",
           "createdAt": "2026-11-09T02:00:00Z",
           "status": "sent"
@@ -138,13 +251,30 @@
         {
           "id": "msg_016",
           "role": "assistant",
-          "content": "WHERE filters individual rows before grouping. HAVING filters groups after GROUP BY has been applied. Use WHERE for conditions on source rows and HAVING for conditions involving aggregates such as COUNT or AVG.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "WHERE filters individual rows before grouping and aggregation. HAVING filters groups after GROUP BY has been applied and is commonly used with aggregate functions such as COUNT, SUM, and AVG.",
+              "score": 0.99,
+              "source": "SQL Query Fundamentals",
+              "section": "WHERE and HAVING",
+              "url": "https://example.com/sql-where-having"
+            },
+            {
+              "content": "A query can use WHERE and HAVING together. WHERE first limits the rows included in the grouping operation, while HAVING filters the resulting groups.",
+              "score": 0.96,
+              "source": "SQL Grouping and Aggregation",
+              "section": "Filtering Grouped Results",
+              "url": "https://example.com/sql-grouping"
+            }
+          ],
           "createdAt": "2026-11-09T02:01:00Z",
           "status": "complete"
         },
         {
           "id": "msg_017",
           "role": "user",
+          "type": "text",
           "content": "Can HAVING be used without GROUP BY?",
           "createdAt": "2026-11-09T02:10:00Z",
           "status": "sent"
@@ -152,7 +282,23 @@
         {
           "id": "msg_018",
           "role": "assistant",
-          "content": "Yes. Many SQL databases allow HAVING without an explicit GROUP BY, treating the result as one group. It's less common, though, and behavior can vary by database dialect.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "Many SQL database systems allow HAVING without an explicit GROUP BY. In that case, the query treats the input as a single group, allowing aggregate conditions to be evaluated across the entire result set.",
+              "score": 0.97,
+              "source": "SQL Aggregation Reference",
+              "section": "HAVING Without GROUP BY",
+              "url": "https://example.com/sql-having-aggregation"
+            },
+            {
+              "content": "The exact behavior and accepted syntax can vary between database systems, so queries should be checked against the SQL dialect being used.",
+              "score": 0.89,
+              "source": "Database SQL Compatibility Guide",
+              "section": "Dialect Differences",
+              "url": "https://example.com/sql-dialects"
+            }
+          ],
           "createdAt": "2026-11-09T02:11:00Z",
           "status": "complete"
         }
@@ -167,6 +313,7 @@
         {
           "id": "msg_019",
           "role": "user",
+          "type": "text",
           "content": "I want to build a portfolio project that demonstrates full-stack skills. Any ideas?",
           "createdAt": "2026-11-08T14:00:00Z",
           "status": "sent"
@@ -174,13 +321,30 @@
         {
           "id": "msg_020",
           "role": "assistant",
-          "content": "A task-management app, personal finance dashboard, event-planning tool, or searchable book catalog could demonstrate frontend, backend, database, and authentication skills. Choose one with a clear core workflow rather than too many features at once.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "Task-management applications, personal finance dashboards, event-planning tools, and searchable catalogs can demonstrate frontend development, backend APIs, database design, and authentication.",
+              "score": 0.97,
+              "source": "Full-Stack Portfolio Project Guide",
+              "section": "Project Ideas",
+              "url": "https://example.com/fullstack-projects"
+            },
+            {
+              "content": "A focused project with one clear core workflow is generally more effective than a large application with many incomplete features.",
+              "score": 0.94,
+              "source": "Developer Portfolio Handbook",
+              "section": "Choosing a Project Scope",
+              "url": "https://example.com/portfolio-handbook"
+            }
+          ],
           "createdAt": "2026-11-08T14:01:00Z",
           "status": "complete"
         },
         {
           "id": "msg_021",
           "role": "user",
+          "type": "text",
           "content": "I like the event-planning idea. What features would make it interesting without making it enormous?",
           "createdAt": "2026-11-08T14:10:00Z",
           "status": "sent"
@@ -188,7 +352,23 @@
         {
           "id": "msg_022",
           "role": "assistant",
-          "content": "A focused version could let users create events, invite attendees, collect RSVPs, and view an attendee list. Authentication and a simple calendar view could be stretch goals. That gives you several meaningful CRUD operations and a clear data model.",
+          "type": "search-results",
+          "results": [
+            {
+              "content": "A manageable event-planning application could support event creation, attendee invitations, RSVP collection, and an attendee list. These features provide several meaningful CRUD operations.",
+              "score": 0.98,
+              "source": "Event Application Design Guide",
+              "section": "Core Features",
+              "url": "https://example.com/event-app-design"
+            },
+            {
+              "content": "Authentication and a calendar view can be added as stretch goals after the core event creation and RSVP workflows are working.",
+              "score": 0.92,
+              "source": "Full-Stack Project Planning",
+              "section": "Incremental Development",
+              "url": "https://example.com/project-planning"
+            }
+          ],
           "createdAt": "2026-11-08T14:11:00Z",
           "status": "complete"
         }
