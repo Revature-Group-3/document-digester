@@ -2,6 +2,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
+import { Conversation } from '../models/conversation';
 import { SearchResponse } from '../models/search-response';
 import { ChatService } from './chat-service';
 
@@ -23,6 +24,21 @@ describe('ChatService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should load only conversations created in memory', () => {
+    let loadedConversations: Conversation[] = [];
+    service.loadConversations().subscribe(conversations => {
+      loadedConversations = conversations;
+    });
+    expect(loadedConversations).toEqual([]);
+
+    const conversation = service.createConversation('First question');
+    service.loadConversations().subscribe(conversations => {
+      loadedConversations = conversations;
+    });
+
+    expect(loadedConversations).toEqual([conversation]);
   });
 
   it('should send a search query and return the backend response', () => {

@@ -13,7 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
   templateUrl: './conversation-list.html',
 })
 export class ConversationList {
-  conversations = input<Conversation[]>();
+  conversations = input<Conversation[]>([]);
   selectedConversationId = input<string | null>(null);
   conversationSelected = output<string>();
   conversationRenamed = output<{ conversationId: string; title: string }>();
