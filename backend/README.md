@@ -28,3 +28,25 @@ Each stored chunk includes its page title, source URL, `Header 2` and
 `Header 3` section metadata, and chunk index. The page title is the document's
 overall title; the heading metadata identifies its section. Chunks created
 before the first matching heading use empty strings for missing heading levels.
+# Running the API
+
+1. Create your environment file from the example (from the `backend` directory):
+
+   ```powershell
+   cp .env.example .env
+   ```
+
+   `DATABASE_URL` is required. A placeholder works for vector and hybrid
+   search; SQL search needs a real Postgres connection string.
+
+2. Index the docs (see above) so search has something to return.
+
+3. Start the API from the `backend` directory:
+
+   ```powershell
+   uv run fastapi dev
+   ```
+
+   The app entrypoint is set in `pyproject.toml`, so no path is needed as long
+   as you run it from `backend`. The interactive API docs are at
+   http://127.0.0.1:8000/docs.

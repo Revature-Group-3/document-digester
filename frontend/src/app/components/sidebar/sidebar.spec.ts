@@ -23,7 +23,7 @@ describe('New conversation flow', () => {
 
   function sendMessage(content: string) {
     windowComponent().sendMessage(content);
-    http.expectOne('/api/search').flush({ query: content, results: [] });
+    http.expectOne('/api/search/vector').flush({ query: content, results: [] });
     fixture.detectChanges();
   }
 

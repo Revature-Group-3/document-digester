@@ -12,7 +12,7 @@ import { SearchResponse } from '../models/search-response';
 })
 export class ChatService {
     private http = inject(HttpClient);
-    private searchUrl = '/api/search';
+    private searchUrl = '/api/search/vector';
     private conversations: Conversation[] = [];
 
     loadConversations(): Observable<Conversation[]> {
