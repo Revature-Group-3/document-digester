@@ -43,12 +43,24 @@ def format_search_result(result: dict) -> SearchResult:
         part for part in section_parts if part
     )
 
+    source_value = metadata.get("source")
+
+    url = (
+        source_value
+        if isinstance(source_value, str)
+        and source_value.startswith(("http://", "https://"))
+        else None
+    )
+
     return SearchResult(
         content=result.get("text", ""),
         score=result.get("score"),
-        source=metadata.get("title", "Godot Documentation"),
+        source=metadata.get(
+            "source_name",
+            metadata.get("title", "Godot Documentation")
+        ),
         section=section or metadata.get("title", ""),
-        url=metadata.get("source")
+        url=url
     )
 
 
@@ -119,4 +131,74 @@ async def hybrid_search(
         raise HTTPException(
             status_code=500,
             detail="Hybrid search failed."
+        )
+
+
+@router.post("/sql", response_model=SearchResponse)
+async def sql_search(
+    request: SearchRequest,
+    service: SearchService = Depends(get_search_service)
+):
+    try:
+        results = await run_in_threadpool(
+            service.sql_search,
+            request.query,
+            request.top_k
+        )
+
+        return SearchResponse(
+            query=request.query,
+            results=[
+                format_search_result(result)
+                for result in results
+            ]
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error)
+        )
+
+    except Exception:
+        logger.exception("SQL search failed.")
+
+        raise HTTPException(
+            status_code=500,
+            detail="SQL search failed."
+        )
+
+
+@router.post("/combined", response_model=SearchResponse)
+async def combined_search(
+    request: SearchRequest,
+    service: SearchService = Depends(get_search_service)
+):
+    try:
+        results = await run_in_threadpool(
+            service.combined_search,
+            request.query,
+            request.top_k
+        )
+
+        return SearchResponse(
+            query=request.query,
+            results=[
+                format_search_result(result)
+                for result in results
+            ]
+        )
+
+    except ValueError as error:
+        raise HTTPException(
+            status_code=400,
+            detail=str(error)
+        )
+
+    except Exception:
+        logger.exception("Combined search failed.")
+
+        raise HTTPException(
+            status_code=500,
+            detail="Combined search failed."
         )
