@@ -3,9 +3,5 @@ export interface SearchResult {
     score: number;
     source: string;
     section: string;
-<<<<<<< HEAD
-    url?: string;
-=======
     url: string | null;
->>>>>>> origin/main
 }

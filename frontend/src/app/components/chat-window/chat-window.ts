@@ -80,23 +80,6 @@ export class ChatWindow {
     this.messages.set([...conversation.messages]);
     if (isNew) this.conversationCreated.emit(conversation);
 
-<<<<<<< HEAD
-    // Request search results from backend
-    this.chatService.searchDocuments(content).subscribe(results => {
-      const assistantMessage: ChatMessage = {
-        id: crypto.randomUUID(),
-        role: 'assistant',
-        type: 'search-results',
-        results,
-        createdAt: Date.now().toString(),
-        status: 'complete',
-      };
-
-      this.chatService.addMessage(conversation.conversationId, assistantMessage);
-      this.messages.set([...conversation.messages]);
-    });
-
-=======
     this.searching.set(true);
     this.searchError.set(null);
     this.chatService.searchDocuments(content).pipe(
@@ -122,7 +105,6 @@ export class ChatWindow {
         this.searchError.set('Could not search documentation. Please try again.');
       },
     });
->>>>>>> origin/main
   }
 
 }
