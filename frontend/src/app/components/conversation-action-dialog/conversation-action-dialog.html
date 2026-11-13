@@ -1,0 +1,36 @@
+<header>
+    <h2 mat-dialog-title>
+        {{ data.action === 'rename' ? 'Rename conversation' : 'Delete conversation?' }}
+    </h2>
+</header>
+
+<mat-dialog-content>
+    @if (data.action === 'rename') {
+        <mat-form-field appearance="outline" class="title-field">
+            <mat-label>Conversation name</mat-label>
+            <input
+                matInput
+                [value]="title()"
+                (input)="setTitle($event)"
+                (keydown.enter)="confirm()"
+                maxlength="80"
+                autofocus
+            />
+        </mat-form-field>
+    } @else {
+        <p>Are you sure you want to delete "{{ data.title }}"?</p>
+    }
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="cancel()">Cancel</button>
+    <button
+        mat-flat-button
+        type="button"
+        [color]="data.action === 'delete' ? 'warn' : 'primary'"
+        [disabled]="data.action === 'rename' && !title().trim()"
+        (click)="confirm()"
+    >
+        {{ data.action === 'rename' ? 'Save' : 'Delete' }}
+    </button>
+</mat-dialog-actions>
