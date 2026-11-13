@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, output, signal, afterRenderEffect, viewChild } from '@angular/core';
 import { finalize } from 'rxjs';
 
 import { ChatService } from '../../services/chat-service';
@@ -23,11 +23,17 @@ export class ChatWindow {
   messageSearch = signal('');
   searching = signal(false);
   searchError = signal<string | null>(null);
+  chatInput = viewChild(ChatInput);
 
   constructor() {
     effect(() => {
       this.messages.set([...(this.conversation()?.messages ?? [])]);
       this.messageSearch.set('');
+    });
+
+    afterRenderEffect(() => {
+      this.conversation();
+      this.chatInput()?.focusInput();
     });
   }
 
