@@ -15,7 +15,7 @@ from time import perf_counter
 
 from document_digester.evaluation.adapter import chunk_labels, normalize_question, page_from_url
 from document_digester.evaluation.metrics import evaluate, load_golden_set, relevant_set
-from document_digester.retrieval import RetrievalService
+from document_digester.service.retrieval import RetrievalService
 
 BACKEND_DIR = Path(__file__).resolve().parents[3]
 DEFAULT_GOLDEN = BACKEND_DIR / "eval" / "golden_set.jsonl"
